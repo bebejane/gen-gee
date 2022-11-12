@@ -1,7 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-}
+	typescript: {
+		ignoreBuildErrors: true,
+	},
+	eslint: {
+		ignoreDuringBuilds: true,
+	},
+	devIndicators: {
+		buildActivity: false,
+	},
+	experimental: {
+		scrollRestoration: true,
+	},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
