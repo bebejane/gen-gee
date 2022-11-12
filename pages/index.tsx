@@ -3,7 +3,7 @@ import s from './index.module.scss'
 import React from 'react'
 import { useDebounce } from 'usehooks-ts'
 import { useEffect } from 'react'
-import template from '/templates/imgram.json'
+//import template from '/templates/imgram.json'
 
 const images = ['/images/image1.jpg', '/images/image2.jpg', '/images/image3.jpg']
 const colors = ['#ffffff', '#000000', '#7fffd4', '#ff7fc3']
