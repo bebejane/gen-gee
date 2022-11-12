@@ -1,7 +1,59 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
-import template from '/templates/imgram.json'
+const template = {
+  "container": {
+    "position": "relative",
+    "width": "100%",
+    "height": "100%",
+    "display": "flex",
+    "flexDirection": "column",
+    "textAlign": "left",
+    "alignItems": "flex-start",
+    "justifyContent": "center"
+  },
+  "header": {
+    "textAlign": "left",
+    "fontSize": "100px",
+    "fontWeight": "bold",
+    "value": "Logga in?"
+  },
+  "text": {
+    "position": "absolute",
+    "top:": 0,
+    "left:": 0,
+    "zIndex": 3,
+    "fontSize": "40px",
+    "color": "#FFFFFF",
+    "background": "transparent",
+    "width": "100%",
+    "height": "100%",
+    "display": "flex",
+    "lineHeight": 1,
+    "flexDirection": "column",
+    "textAlign": "left",
+    "alignItems": "flex-start",
+    "justifyContent": "center",
+    "transform": "rotate(0deg)",
+    "value": "nej jag vill inte!",
+    "padding": "20px"
+  },
+  "image": {
+    "position": "absolute",
+    "top:": 0,
+    "left:": 0,
+    "zIndex": 2,
+    "width": "100%",
+    "height": "100%",
+    "objectFit": "cover",
+    "url": "/images/image1.jpg"
+  },
+  "dimensions": {
+    "width": "800px",
+    "height": "500px"
+  }
+}
+
 
 export const config = {
   runtime: 'experimental-edge',
