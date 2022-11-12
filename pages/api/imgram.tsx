@@ -1,6 +1,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
+
 const template = {
   "container": {
     "position": "relative",
@@ -49,8 +50,8 @@ const template = {
     "url": "/images/image1.jpg"
   },
   "dimensions": {
-    "width": "800px",
-    "height": "500px"
+    "width": 800,
+    "height": 500
   }
 }
 
