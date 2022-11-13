@@ -1,19 +1,24 @@
 import { useState } from 'react'
 import s from './index.module.scss'
 import React from 'react'
-import { useDebounce } from 'usehooks-ts'
+import { useDebounce, useFetch } from 'usehooks-ts'
 import { useEffect } from 'react'
-//import template from '/templates/imgram.json'
+import template from '/templates/imgram.json'
 
 const images = ['/images/image1.jpg', '/images/image2.jpg', '/images/image3.jpg']
 const colors = ['#ffffff', '#000000', '#7fffd4', '#ff7fc3']
 
+const inputProps = ({ element, prop, prefix, suffix }) => {
+  return {
+
+  }
+}
+
 export default function Home() {
 
   const [loading, setLoading] = useState(false)
-  const [_params, setParams] = useState({})
-  const [image, setImage] = useState(images[0])
-  const params = useDebounce<any>(_params, 300)
+  const [params, setParams] = useState(template)
+  const _params = useDebounce<any>(params, 300)
 
   const update = ({
     target: {
@@ -25,28 +30,28 @@ export default function Home() {
         prefix = '',
         suffix = '',
       }
-    } }: React.ChangeEvent<HTMLInputElement>) => {
+    } }: React.ChangeEvent<HTMLInputElement | HTMLElement>) => {
 
     if (!element || !prop)
       return console.error(element, prop, 'not found')
 
     setParams({
-      ..._params,
+      ...params,
       [element]: {
-        ..._params[element],
+        ...params[element],
         [prop]: `${prefix}${value || dataValue}${suffix}`
       }
     })
   }
 
   useEffect(() => {
-    if (!Object.keys(params).length)
+    if (!Object.keys(_params).length)
       return
 
     setLoading(true)
-  }, [params])
+  }, [_params])
 
-  const qs = encodeURIComponent(JSON.stringify(params))
+  const qs = encodeURIComponent(JSON.stringify(_params))
   const imageUrl = `/api/imgram?params=${qs}`
 
   return (
@@ -55,7 +60,6 @@ export default function Home() {
         <img
           alt="image"
           src={imageUrl}
-          className={loading ? s.spin : undefined}
           onLoad={() => setLoading(false)}
         />
         {loading && <div className={s.loading}></div>}
@@ -72,6 +76,9 @@ export default function Home() {
             data-element="text"
             data-prop="fontSize"
             data-suffix="px"
+            min="0"
+            max="128"
+            value={params.text.fontSize.replace('px', '')}
             onChange={update}
           />
           <br />
@@ -80,7 +87,7 @@ export default function Home() {
             {colors.map((color, idx) =>
               <div
                 key={idx}
-                className={_params.text?.color === color ? s.selected : undefined}
+                className={params.text?.color === color ? s.selected : undefined}
                 style={{ backgroundColor: color }}
                 data-prop="color"
                 data-element="text"
@@ -89,15 +96,16 @@ export default function Home() {
               ></div>
             )}
           </div>
-          <label htmlFor="rotate">Padding</label>
+          <label htmlFor="padding">Padding</label>
           <input
-            name="rotate"
+            name="padding"
             min={20}
             max={100}
             type="range"
             data-element="text"
             data-prop="padding"
             data-suffix="px"
+            value={params.text.padding.replace('px', '')}
             onChange={update}
           />
           <br />
@@ -107,6 +115,7 @@ export default function Home() {
             type="text"
             data-element="header"
             data-prop="value"
+            value={params.header.value}
             onChange={update}
           />
           <br />
@@ -117,7 +126,7 @@ export default function Home() {
             onChange={update}
             rows={4}
             cols={40}
-          ></textarea>
+          >{params.text.value}</textarea>
           <br />
           <label htmlFor="align">Align</label>
           <select
@@ -125,6 +134,7 @@ export default function Home() {
             onChange={update}
             data-element="text"
             data-prop="alignItems"
+            value={params.text.alignItems}
           >
             <option value="flex-start">Left</option>
             <option value="center">Center</option>
@@ -136,6 +146,7 @@ export default function Home() {
             onChange={update}
             data-element="text"
             data-prop="textAlign"
+            value={params.text.textAlign}
           >
             <option value="left">Left</option>
             <option value="center">Center</option>
@@ -145,7 +156,7 @@ export default function Home() {
             {images.map((url, idx) =>
               <img
                 key={idx}
-                className={_params.image?.url === url ? s.selected : undefined}
+                className={params.image?.url === url ? s.selected : undefined}
                 src={url}
                 data-prop="url"
                 data-element="image"
