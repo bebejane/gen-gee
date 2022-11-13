@@ -4,10 +4,10 @@ import React from 'react'
 import { useDebounce, useFetch } from 'usehooks-ts'
 import { useEffect, useRef } from 'react'
 import template from '/templates/imgram.json'
+import fonts from '/fonts.json'
 
 const images = ['/images/image1.jpg', '/images/image2.jpg', '/images/image3.jpg']
 const colors = ['#ffffff', '#000000', '#7fffd4', '#ff7fc3']
-const fonts = ['Helvetica', 'Dominicale-Alpha', 'ProtokollBold-Web']
 
 const inputProps = ({ element, prop, prefix, suffix }) => {
   return {
@@ -41,7 +41,7 @@ export default function Home() {
       ...params,
       [element]: {
         ...params[element],
-        [prop]: `${prefix}${value || dataValue}${suffix}`
+        [prop]: `${prefix}${(value || dataValue) || ''}${suffix}`
       }
     })
   }
@@ -162,8 +162,8 @@ export default function Home() {
                 data-prop="fontFamily"
                 value={params.header?.fontFamily}
               >
-                {fonts.map((fontFamily, key) =>
-                  <option key={key} value={fontFamily}>{fontFamily}</option>
+                {fonts.map(({ name }, key) =>
+                  <option key={key} value={name}>{name}</option>
                 )}
               </select>
             </div>
@@ -183,7 +183,7 @@ export default function Home() {
           </div>
           <div className={s.row}>
             <div>
-              <label htmlFor="font-text">font (text)</label>
+              <label htmlFor="font-text">Font (text)</label>
               <select
                 name="font-text"
                 onChange={update}
@@ -191,8 +191,8 @@ export default function Home() {
                 data-prop="fontFamily"
                 value={params.text?.fontFamily}
               >
-                {fonts.map((fontFamily, key) =>
-                  <option key={key} value={fontFamily}>{fontFamily}</option>
+                {fonts.map(({ name }, key) =>
+                  <option key={key} value={name}>{name}</option>
                 )}
               </select>
             </div>
@@ -213,7 +213,7 @@ export default function Home() {
               </select>
             </div>
             <div>
-              <label htmlFor="alignText">Align text</label>
+              <label htmlFor="alignText">Text align</label>
               <select
                 name="alignText"
                 onChange={update}
