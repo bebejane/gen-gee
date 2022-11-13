@@ -1,7 +1,9 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
+import template from '../templates/imgram.json'
 
+/*
 const template = {
   "container": {
     "position": "relative",
@@ -54,7 +56,7 @@ const template = {
     "height": 500
   }
 }
-
+*/
 
 export const config = {
   runtime: 'experimental-edge',
