@@ -3,66 +3,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
 import template from '/templates/imgram.json'
 
-/*
-const template = {
-  "container": {
-    "position": "relative",
-    "width": "100%",
-    "height": "100%",
-    "display": "flex",
-    "flexDirection": "column",
-    "textAlign": "left",
-    "alignItems": "flex-start",
-    "justifyContent": "center"
-  },
-  "header": {
-    "textAlign": "left",
-    "fontSize": "100px",
-    "fontWeight": "bold",
-    "value": "Logga in?"
-  },
-  "text": {
-    "position": "absolute",
-    "top:": 0,
-    "left:": 0,
-    "zIndex": 3,
-    "fontSize": "40px",
-    "color": "#FFFFFF",
-    "background": "transparent",
-    "width": "100%",
-    "height": "100%",
-    "display": "flex",
-    "lineHeight": 1,
-    "flexDirection": "column",
-    "textAlign": "left",
-    "alignItems": "flex-start",
-    "justifyContent": "center",
-    "transform": "rotate(0deg)",
-    "value": "nej jag vill inte!",
-    "padding": "20px"
-  },
-  "image": {
-    "position": "absolute",
-    "top:": 0,
-    "left:": 0,
-    "zIndex": 2,
-    "width": "100%",
-    "height": "100%",
-    "objectFit": "cover",
-    "url": "/images/image1.jpg"
-  },
-  "dimensions": {
-    "width": 800,
-    "height": 500
+const generateFont = async (name: string, format = { weight: 400, style: 'normal' }) => {
+  console.log(`${process.env.NEXT_PUBLIC_SITE_URL}/fonts/${name}.woff`);
+
+  return {
+    name,
+    data: await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/fonts/${name}.woff`).then(res => res.arrayBuffer()),
+    ...format
   }
 }
-*/
 
 export const config = {
   runtime: 'experimental-edge',
 };
 
-export default function handler(req: NextRequest, res: NextResponse) {
+export default async function handler(req: NextRequest, res: NextResponse) {
   let params: any = {}
 
   try {
@@ -70,6 +25,12 @@ export default function handler(req: NextRequest, res: NextResponse) {
   } catch (err) {
     console.error(err);
   }
+
+  const fonts = await Promise.all([
+    'Dominicale-Alpha',
+    'ProtokollBold-Web',
+    'Helvetica'
+  ].map((font) => generateFont(font)))
 
   Object.keys(template).forEach((k) => params[k] = { ...template[k], ...params[k] })
 
@@ -87,6 +48,9 @@ export default function handler(req: NextRequest, res: NextResponse) {
           </span>
         </div>
       </div>
-    ), { ...template.dimensions }
+    ), {
+    ...template.dimensions,
+    fonts
+  }
   );
 }

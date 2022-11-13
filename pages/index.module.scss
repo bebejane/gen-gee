@@ -4,17 +4,23 @@
   flex-direction: row;
   min-height: 100vh;
 
-
+  input,
+  select,
+  textarea,
+  button {
+    padding: 10px;
+  }
 
   .image {
     position: relative;
     display: flex;
     align-items: center;
-    flex: 0 0 50%;
+    flex: 0 0 60%;
     background-color: rgb(220, 255, 227);
 
     img {
-      max-width: 50vw;
+      min-width: 60vw;
+      max-width: 60vw;
 
       &.spin {
         animation: spin 0.1s linear infinite;
@@ -49,18 +55,18 @@
 
   .config {
     position: relative;
-    flex: 0 0 50%;
+    flex: 0 0 40%;
+    display: flex;
+    align-items: flex-start;
     padding: 2rem;
 
     label {
       display: block;
-      margin-top: 1rem;
-      margin-bottom: .3rem;
+      margin-bottom: .5rem;
     }
 
     .images,
     .colors {
-      margin-top: 2rem;
       display: flex;
       flex-direction: row;
 
@@ -68,14 +74,29 @@
       div {
         height: 50px;
         width: 50px;
-        margin-right: 1rem;
+        margin-right: 0.4rem;
         border: 5px solid gray;
+
+        &:last-child {
+          margin-right: 0;
+        }
 
         &.selected {
           border: 5px solid rgb(149, 255, 0);
         }
       }
     }
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.5rem;
+
+  >div {
+    margin-right: 1rem;
+
   }
 }
 

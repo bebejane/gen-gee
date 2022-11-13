@@ -13,7 +13,8 @@
 		"textAlign": "left",
 		"fontSize": "100px",
 		"fontWeight": "bold",
-		"value": "Logga in?"
+		"value": "Logga in?",
+		"fontFamily": "Helvetica"
 	},
 	"text": {
 		"position": "absolute",
@@ -26,14 +27,16 @@
 		"width": "100%",
 		"height": "100%",
 		"display": "flex",
-		"lineHeight": 1,
+		"whiteSpace": "pre",
+		"lineHeight": 1.3,
 		"flexDirection": "column",
 		"textAlign": "left",
 		"alignItems": "flex-start",
 		"justifyContent": "center",
 		"transform": "rotate(0deg)",
 		"value": "nej jag vill inte!",
-		"padding": "20px"
+		"padding": "20px",
+		"fontFamily": "Helvetica"
 	},
 	"image": {
 		"position": "absolute",
