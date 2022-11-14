@@ -1,7 +1,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
-import template from '/templates/imgram.json'
+import template from '/templates/gengee.json'
 import fontFiles from '/fonts.json'
 
 export type FontOption = {

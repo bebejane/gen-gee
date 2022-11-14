@@ -3,7 +3,7 @@ import s from './index.module.scss'
 import React from 'react'
 import { useDebounce, useFetch } from 'usehooks-ts'
 import { useEffect, useRef } from 'react'
-import template from '/templates/imgram.json'
+import template from '/template/gengee.json'
 import fonts from '/fonts.json'
 
 const images = ['/images/image1.jpg', '/images/image2.jpg', '/images/image3.jpg']
@@ -57,7 +57,7 @@ export default function Home() {
   }, [_params, ref])
 
   const qs = encodeURIComponent(JSON.stringify(_params))
-  const imageUrl = `/api/imgram?params=${qs}`
+  const imageUrl = `/api/gengee?params=${qs}`
 
   return (
     <div className={s.container}>
