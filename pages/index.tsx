@@ -3,7 +3,7 @@ import s from './index.module.scss'
 import React from 'react'
 import { useDebounce, useFetch } from 'usehooks-ts'
 import { useEffect, useRef } from 'react'
-import template from '/template/gengee.json'
+import template from '/templates/gengee.json'
 import fonts from '/fonts.json'
 
 const images = ['/images/image1.jpg', '/images/image2.jpg', '/images/image3.jpg']
