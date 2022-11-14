@@ -1,0 +1,38 @@
+{
+	"container": {
+		"position": "relative",
+		"width": "100%",
+		"height": "100%",
+		"display": "flex",
+		"flexDirection": "column",
+		"textAlign": "right",
+		"alignItems": "flex-end",
+		"justifyContent": "center",
+		"backgroundColor": "#00ffcc"
+	},
+	"image": {
+		"position": "absolute",
+		"top": "0",
+		"left": "0",
+		"zIndex": 1,
+		"width": "100%",
+		"height": "100%",
+		"objectFit": "cover"
+	},
+	"text": {
+		"position": "absolute",
+		"display": "flex",
+		"alignItems": "flex-start",
+		"justifyContent": "center",
+		"zIndex": 2,
+		"width": "100%",
+		"height": "100%",
+		"flexDirection": "column",
+		"top": "0",
+		"left": "0",
+		"color": "#ffffff",
+		"fontFamily": "ProtokollBold",
+		"fontSize": "100px",
+		"value": "Text..."
+	}
+}

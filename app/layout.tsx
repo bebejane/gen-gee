@@ -1,4 +1,4 @@
-import './globals.css'
+import './global.scss'
 
 export type LayoutProps = {
   children: React.ReactNode

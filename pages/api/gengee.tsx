@@ -1,8 +1,43 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
-import template from '/app/templates/gengee.json'
 import fontFiles from '/fonts.json'
+import * as templates from '/templates'
+
+export default async function handler(req: NextRequest, res: NextResponse) {
+  let params: any = {}
+  const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name })))
+  const name = req.nextUrl.searchParams.get('template')
+
+  try {
+    if (req.nextUrl.searchParams.get('params'))
+      params = JSON.parse(req.nextUrl.searchParams.get('params'))
+  } catch (err) {
+    console.error(err);
+  }
+
+  const Component = templates[Object.keys(templates).find(k => k.toLocaleLowerCase() === name.toLowerCase())]
+  const template = Component.template
+  const config = Component.config || defaultConfig
+
+  Object.keys(template).forEach((k) => params[k] = {
+    ...template[k],
+    ...params[k]
+  })
+
+  return new ImageResponse(
+    <Component {...params} />, {
+    ...config.dimensions,
+    fonts
+  })
+}
+
+const defaultConfig = {
+  "dimensions": {
+    "width": 800,
+    "height": 500
+  }
+}
 
 export type FontOption = {
   name: string,
@@ -19,37 +54,6 @@ const generateFont = async (opt: Omit<FontOption, 'data'>): Promise<FontOption> 
   }
 }
 
-export default async function handler(req: NextRequest, res: NextResponse) {
-  let params: any = {}
-
-  try {
-    params = JSON.parse(req.nextUrl.searchParams.get('params'))
-  } catch (err) {
-    console.error(err);
-  }
-
-  const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name })))
-
-  Object.keys(template).forEach((k) => params[k] = { ...template[k], ...params[k] })
-
-  return new ImageResponse((
-    <div style={{ ...params.container }}>
-      <img
-        style={{ ...params.image }}
-        src={`${process.env.NEXT_PUBLIC_SITE_URL}${params.image?.url}`}
-      />
-      <div style={{ ...params.text }}>
-        <h1 style={{ ...params.header }}>{params.header?.value || ''}</h1>
-        <span>
-          {params.text?.value || ''}
-        </span>
-      </div>
-    </div>
-  ), {
-    ...template.dimensions,
-    fonts
-  })
-}
 
 export const config = {
   runtime: 'experimental-edge',

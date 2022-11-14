@@ -3,106 +3,62 @@
   display: flex;
   flex-direction: row;
   min-height: 100vh;
-
-  input,
-  select,
-  textarea,
-  button {
-    padding: 10px;
-  }
+  padding: 0;
+  flex-direction: row;
 
   .image {
-    position: relative;
+    flex: 0 0 50%;
     display: flex;
     align-items: center;
-    flex: 0 0 60%;
-    background-color: rgb(220, 255, 227);
+    background-color: beige;
 
     img {
-      min-width: 60vw;
-      max-width: 60vw;
+      max-width: 50vw;
+    }
+  }
 
-      &.spin {
-        animation: spin 0.1s linear infinite;
+  .template {
+    --padding: 10px;
+    flex: 0 0 50%;
+    padding: var(--padding);
 
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg) scale(0.3);
-          }
-
-          50% {
-            transform: rotate(180deg) scale(0.1);
-          }
-
-          100% {
-            transform: rotate(360deg) scale(0.3);
-          }
-        }
-      }
+    select,
+    textarea,
+    button {
+      padding: var(--padding);
+      outline: none;
+      margin-bottom: 10px;
     }
 
-    .loading {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 10;
-      color: black;
+    select {
       width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-  }
+      text-align: center;
+      outline: none;
 
-  .config {
-    position: relative;
-    flex: 0 0 40%;
-    display: flex;
-    align-items: flex-start;
-    padding: 2rem;
-
-    label {
-      display: block;
-      margin-bottom: .5rem;
-    }
-
-    .images,
-    .colors {
-      display: flex;
-      flex-direction: row;
-
-      img,
-      div {
-        height: 50px;
-        width: 50px;
-        margin-right: 0.4rem;
-        border: 5px solid gray;
-
-        &:last-child {
-          margin-right: 0;
-        }
-
-        &.selected {
-          border: 5px solid rgb(149, 255, 0);
-        }
+      option {
+        text-align: center;
       }
     }
+
+    textarea {
+      white-space: pre;
+
+      height: calc(100% - calc(var(--padding) * 2) - 80px);
+      width: 100%;
+      -moz-tab-size: 2;
+      -o-tab-size: 2;
+      tab-size: 2;
+      border: 1px solid gray;
+
+      &.error {
+        border: 1px solid red;
+      }
+    }
+
+    button {
+      width: 100%;
+
+    }
   }
-}
 
-.row {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1.5rem;
-
-  >div {
-    margin-right: 1rem;
-
-  }
-}
-
-.download {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 1rem;
 }
