@@ -1,9 +1,11 @@
+'use client'
+
 import { useState } from 'react'
-import s from './index.module.scss'
+import s from './page.module.scss'
 import React from 'react'
 import { useDebounce, useFetch } from 'usehooks-ts'
 import { useEffect, useRef } from 'react'
-import template from '/templates/gengee.json'
+import template from './templates/gengee.json'
 import fonts from '/fonts.json'
 
 const images = ['/images/image1.jpg', '/images/image2.jpg', '/images/image3.jpg']
