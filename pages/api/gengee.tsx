@@ -5,31 +5,45 @@ import fontFiles from '/fonts.json'
 import * as templates from '/templates'
 
 export default async function handler(req: NextRequest, res: NextResponse) {
-  let params: any = {}
-  const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name })))
-  const name = req.nextUrl.searchParams.get('template')
 
   try {
+
+    let params: any = {}
+    const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name })))
+    const name = req.nextUrl.searchParams.get('template')
+
+
     if (req.nextUrl.searchParams.get('params'))
       params = JSON.parse(req.nextUrl.searchParams.get('params'))
+
+    const Component = templates[Object.keys(templates).find(k => k.toLocaleLowerCase() === name.toLowerCase())]
+    const template = Component.template
+    const config = Component.config || defaultConfig
+
+    Object.keys(template).forEach((k) => params[k] = {
+      ...template[k],
+      ...params[k]
+    })
+
+    return new ImageResponse(<Component {...params} />, { ...config.dimensions, fonts })
+
   } catch (err) {
-    console.error(err);
+
+
+    return new ImageResponse(
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "20px",
+        color: "red"
+      }}>
+        <h1>Error!</h1>
+        {err.message}
+      </div>,
+      { width: 600, height: 400 }
+    )
   }
-
-  const Component = templates[Object.keys(templates).find(k => k.toLocaleLowerCase() === name.toLowerCase())]
-  const template = Component.template
-  const config = Component.config || defaultConfig
-
-  Object.keys(template).forEach((k) => params[k] = {
-    ...template[k],
-    ...params[k]
-  })
-
-  return new ImageResponse(
-    <Component {...params} />, {
-    ...config.dimensions,
-    fonts
-  })
 }
 
 const defaultConfig = {
