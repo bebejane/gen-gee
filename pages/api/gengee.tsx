@@ -9,21 +9,17 @@ export default async function handler(req: NextRequest, res: NextResponse) {
   try {
 
     let params: any = {}
-    const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name })))
+    const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
     const name = req.nextUrl.searchParams.get('template').toLowerCase()
 
 
     if (req.nextUrl.searchParams.get('params'))
       params = JSON.parse(req.nextUrl.searchParams.get('params'))
 
-    const Component = templates[Object.keys(templates).find(k => k.toLocaleLowerCase() === name)]
-    const template = require(`/templates/${name}/index.json`);
-    const config = require(`/templates/${name}/config.json`);
+    const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === name)]
+    const { template, config } = Component
 
-    Object.keys(template).forEach((k) => params[k] = {
-      ...template[k],
-      ...params[k]
-    })
+    Object.keys(template).forEach((k) => params[k] = { ...template[k], ...params[k] })
 
     return new ImageResponse(<Component {...params} />, { ...config.dimensions, fonts })
 
@@ -46,13 +42,6 @@ export default async function handler(req: NextRequest, res: NextResponse) {
   }
 }
 
-const defaultConfig = {
-  "dimensions": {
-    "width": 800,
-    "height": 500
-  }
-}
-
 export type FontOption = {
   name: string,
   data: ArrayBuffer,
@@ -61,13 +50,13 @@ export type FontOption = {
 }
 
 const generateFont = async (opt: Omit<FontOption, 'data'>): Promise<FontOption> => {
+  console.log(opt);
 
   return {
     data: await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/fonts/${opt.name}.woff`).then(res => res.arrayBuffer()),
     ...opt
   }
 }
-
 
 export const config = {
   runtime: 'experimental-edge',
