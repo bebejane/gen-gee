@@ -15,11 +15,4 @@ const SaskiaNeuman = (props) => {
   )
 }
 
-SaskiaNeuman.template = template
-SaskiaNeuman.config = {
-  "dimensions": {
-    "width": 2160,
-    "height": 2160
-  }
-}
 export default SaskiaNeuman;

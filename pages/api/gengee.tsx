@@ -10,18 +10,15 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
     let params: any = {}
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name })))
-    const name = req.nextUrl.searchParams.get('template')
+    const name = req.nextUrl.searchParams.get('template').toLowerCase()
 
 
     if (req.nextUrl.searchParams.get('params'))
       params = JSON.parse(req.nextUrl.searchParams.get('params'))
 
-    const t = require('/templates/saskianeuman/index.json')
-    console.log(t);
-
-    const Component = templates[Object.keys(templates).find(k => k.toLocaleLowerCase() === name.toLowerCase())]
-    const template = Component.template
-    const config = Component.config || defaultConfig
+    const Component = templates[Object.keys(templates).find(k => k.toLocaleLowerCase() === name)]
+    const template = require(`/templates/${name}/index.json`);
+    const config = require(`/templates/${name}/config.json`);
 
     Object.keys(template).forEach((k) => params[k] = {
       ...template[k],
