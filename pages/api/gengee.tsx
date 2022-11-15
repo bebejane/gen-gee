@@ -16,6 +16,9 @@ export default async function handler(req: NextRequest, res: NextResponse) {
     if (req.nextUrl.searchParams.get('params'))
       params = JSON.parse(req.nextUrl.searchParams.get('params'))
 
+    const t = require('/templates/saskianeuman/index.json')
+    console.log(t);
+
     const Component = templates[Object.keys(templates).find(k => k.toLocaleLowerCase() === name.toLowerCase())]
     const template = Component.template
     const config = Component.config || defaultConfig

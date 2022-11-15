@@ -8,7 +8,7 @@
 		"textAlign": "right",
 		"alignItems": "flex-end",
 		"justifyContent": "center",
-		"backgroundColor": "#00ffcc"
+		"backgroundColor": "#00000"
 	},
 	"image": {
 		"position": "absolute",
@@ -17,7 +17,8 @@
 		"zIndex": 1,
 		"width": "100%",
 		"height": "100%",
-		"objectFit": "cover"
+		"objectFit": "cover",
+		"src": ""
 	},
 	"text": {
 		"position": "absolute",

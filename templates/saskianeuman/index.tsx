@@ -5,10 +5,9 @@ const SaskiaNeuman = (props) => {
 
   return (
     <div style={{ ...container }}>
-      <img
-        src={`${process.env.NEXT_PUBLIC_SITE_URL}/images/image1.jpg`}
-        style={{ ...image }}
-      />
+      {image.src &&
+        <img src={image.src} style={{ ...image }} />
+      }
       <div style={{ ...text }}>
         {text?.value}
       </div>
@@ -19,8 +18,8 @@ const SaskiaNeuman = (props) => {
 SaskiaNeuman.template = template
 SaskiaNeuman.config = {
   "dimensions": {
-    "width": 800,
-    "height": 500
+    "width": 2160,
+    "height": 2160
   }
 }
 export default SaskiaNeuman;
