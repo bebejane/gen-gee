@@ -16,8 +16,6 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
   try {
 
-    //  cors(req, res, { origin: '*' });
-
     let params: any = {}
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
     const name = req.nextUrl.searchParams.get('template').toLowerCase()
@@ -37,6 +35,9 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
     console.log(corsHeaders);
 
+    const headers = new Headers()
+    Object.keys(corsHeaders).forEach(k => headers.set(k, corsHeaders[k]))
+
     return new ImageResponse(
       <div style={{
         display: "flex",
@@ -48,7 +49,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
         <h1>Error!</h1>
         {err.message}
       </div>,
-      { width: 600, height: 400, headers: corsHeaders }
+      { width: 600, height: 400, headers }
     )
   }
 }
