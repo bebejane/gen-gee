@@ -9,7 +9,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
   try {
 
-    cors(req, res);
+    cors(req, res, { origin: '*' });
 
     let params: any = {}
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
