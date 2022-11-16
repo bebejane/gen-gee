@@ -3,16 +3,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
 import fontFiles from '/fonts.json'
 import * as templates from '/templates'
-import cors from '../../lib/cors'
+//import cors from '../../lib/cors'
 
-const corsHeaders = {
-  'Access-Control-Allow-Credentials': 'true',
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-  'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-}
 
 export default async function handler(req: NextRequest, res: NextResponse) {
+
+  const corsHeaders = {
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+    'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  }
+
 
   try {
 
@@ -53,7 +55,6 @@ export default async function handler(req: NextRequest, res: NextResponse) {
     )
   }
 }
-https://gengee.vercel.app/api/gengee?template=saskianeuman&params=%7B%22values%22%3A%7B%22src%22%3A%22%22%2C%22artist%22%3A%22Artist%20name%22%2C%22titleSwedish%22%3A%22Svensk%20titel%22%2C%22titleEnglish%22%3A%22Engelsk%20titel%22%2C%22date%22%3A%22DD.MM-DD.MM.YYYY%22%7D%7D
 
 export type FontOption = {
   name: string,
