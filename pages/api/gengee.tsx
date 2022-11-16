@@ -15,6 +15,9 @@ export default async function handler(req: NextRequest, res: NextResponse) {
     'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
   }
 
+  const headers = new Headers()
+  Object.keys(corsHeaders).forEach(k => headers.set(k, corsHeaders[k]))
+
 
   try {
 
@@ -31,14 +34,9 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
     Object.keys(template).forEach((k) => params[k] = { ...template[k], ...params[k] })
 
-    return new ImageResponse(<Component {...params} />, { ...config.dimensions, fonts })
+    return new ImageResponse(<Component {...params} />, { ...config.dimensions, fonts, headers })
 
   } catch (err) {
-
-    console.log(corsHeaders);
-
-    const headers = new Headers()
-    Object.keys(corsHeaders).forEach(k => headers.set(k, corsHeaders[k]))
 
     return new ImageResponse(
       <div style={{
