@@ -3,22 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
 import fontFiles from '/fonts.json'
 import * as templates from '/templates'
-
-const enableCors = (res: NextResponse) => {
-  res.headers.set('Access-Control-Allow-Credentials', 'true')
-  res.headers.set('Access-Control-Allow-Origin', '*')
-  res.headers.set('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
-  res.headers.set(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  )
-}
+import cors from '../../lib/cors'
 
 export default async function handler(req: NextRequest, res: NextResponse) {
 
   try {
 
-    enableCors(res)
+    cors(req, res);
 
     let params: any = {}
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
