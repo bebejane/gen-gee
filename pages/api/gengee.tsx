@@ -10,10 +10,10 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
     let params: any = {}
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
-    const name = req.nextUrl.searchParams.get('template').toLowerCase()
+    const name = req.nextUrl.searchParams.get('t').toLowerCase()
 
-    if (req.nextUrl.searchParams.get('params'))
-      params = JSON.parse(req.nextUrl.searchParams.get('params'))
+    if (req.nextUrl.searchParams.get('p'))
+      params = JSON.parse(req.nextUrl.searchParams.get('p'))
 
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === name)]
     const { template, config } = Component

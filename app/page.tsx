@@ -37,7 +37,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!template) return
-    setSrc(`/api/gengee?template=${template}&params=${encodeURIComponent(params)}&r=${Math.random()}`)
+    setSrc(`/api/gengee?t=${template}&p=${encodeURIComponent(params)}&r=${Math.random()}`)
   }, [setSrc, template, params])
 
   useEffect(() => {
