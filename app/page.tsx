@@ -80,6 +80,7 @@ export default function Home() {
       <div className={s.template}>
         <select onChange={({ target: { value } }) => setTemplate(value === '-1' ? undefined : value)}>
           <option value={'-1'}>Select Template</option>
+          <option value={'-1'}>------------------------------</option>
           {Object.keys(templates).map((name, idx) =>
             <option key={idx} value={name}>{name}</option>
           )}
