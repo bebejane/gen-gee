@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
 import fontFiles from '/fonts.json'
 import * as templates from '/templates'
-//import cors from '../../lib/cors'
+import cors from '../../lib/cors'
 
 
 export default async function handler(req: NextRequest, res: NextResponse) {
@@ -16,8 +16,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
   }
 
   const headers = new Headers()
-  Object.keys(corsHeaders).forEach(k => headers.set(k, corsHeaders[k]))
-
+  //Object.keys(corsHeaders).forEach(k => headers.set(k, corsHeaders[k]))
 
   try {
 
@@ -34,7 +33,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
     Object.keys(template).forEach((k) => params[k] = { ...template[k], ...params[k] })
 
-    return new ImageResponse(<Component {...params} />, { ...config.dimensions, fonts, headers })
+    return new ImageResponse(<Component {...params} />, { ...config.dimensions, fonts })
 
   } catch (err) {
 
@@ -49,7 +48,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
         <h1>Error!</h1>
         {err.message}
       </div>,
-      { width: 600, height: 400, headers }
+      { width: 600, height: 400 }
     )
   }
 }

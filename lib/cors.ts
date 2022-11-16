@@ -142,11 +142,11 @@ export default async function cors(
     if (opts.preflightContinue) return res
 
     headers.set('Content-Length', '0')
-    return new Response(null, { status: opts.optionsSuccessStatus, headers })
+
   }
 
   // If we got here, it's a normal request
-  return res
+  return headers
 }
 
 export function initCors(options?: CorsOptions) {
