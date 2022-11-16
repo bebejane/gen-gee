@@ -3,20 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
 import fontFiles from '/fonts.json'
 import * as templates from '/templates'
-import cors from '../../lib/cors'
-
 
 export default async function handler(req: NextRequest, res: NextResponse) {
-
-  const corsHeaders = {
-    'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-    'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  }
-
-  const headers = new Headers()
-  //Object.keys(corsHeaders).forEach(k => headers.set(k, corsHeaders[k]))
 
   try {
 
@@ -24,16 +12,21 @@ export default async function handler(req: NextRequest, res: NextResponse) {
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
     const name = req.nextUrl.searchParams.get('template').toLowerCase()
 
-
     if (req.nextUrl.searchParams.get('params'))
       params = JSON.parse(req.nextUrl.searchParams.get('params'))
 
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === name)]
     const { template, config } = Component
+    const width = req.nextUrl.searchParams.get('w') ? parseInt(req.nextUrl.searchParams.get('w')) : config.dimensions.width
+    const height = req.nextUrl.searchParams.get('h') ? parseInt(req.nextUrl.searchParams.get('h')) : config.dimensions.height
 
     Object.keys(template).forEach((k) => params[k] = { ...template[k], ...params[k] })
 
-    return new ImageResponse(<Component {...params} />, { ...config.dimensions, fonts })
+    return new ImageResponse(<Component {...params} />, {
+      width,
+      height,
+      fonts
+    })
 
   } catch (err) {
 
