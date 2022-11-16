@@ -5,11 +5,18 @@ import fontFiles from '/fonts.json'
 import * as templates from '/templates'
 import cors from '../../lib/cors'
 
+const corsHeaders = {
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+  'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+}
+
 export default async function handler(req: NextRequest, res: NextResponse) {
 
   try {
 
-    cors(req, res, { origin: '*' });
+    //  cors(req, res, { origin: '*' });
 
     let params: any = {}
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
@@ -28,6 +35,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
   } catch (err) {
 
+    console.log(corsHeaders);
 
     return new ImageResponse(
       <div style={{
@@ -40,7 +48,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
         <h1>Error!</h1>
         {err.message}
       </div>,
-      { width: 600, height: 400 }
+      { width: 600, height: 400, headers: corsHeaders }
     )
   }
 }
