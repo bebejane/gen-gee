@@ -54,8 +54,6 @@ export type FontOption = {
 }
 
 const generateFont = async (opt: Omit<FontOption, 'data'>): Promise<FontOption> => {
-  console.log(opt);
-
   return {
     data: await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/fonts/${opt.name}.woff`).then(res => res.arrayBuffer()),
     ...opt
