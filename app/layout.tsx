@@ -12,7 +12,7 @@ export default async function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
       <head>
-        <title>Gen-Gee</title>
+        <title>Social Gen</title>
       </head>
       <body>
         {children}
