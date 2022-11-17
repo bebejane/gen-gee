@@ -8,11 +8,10 @@ export const revalidate = 30000;
 
 export default async function RootLayout({ children }: LayoutProps) {
 
-
   return (
     <html lang="en">
       <head>
-        <title>Social Gen</title>
+        <title>Social-Gen</title>
       </head>
       <body>
         {children}

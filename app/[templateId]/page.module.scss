@@ -1,0 +1,144 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  padding: 0;
+  flex-direction: row;
+
+  .name {
+    text-align: center;
+    min-height: 40px;
+  }
+
+  .image {
+    position: relative;
+    flex: 0 0 40%;
+    display: flex;
+    align-items: center;
+    background-color: beige;
+
+    img {
+      max-width: 40vw;
+    }
+
+    .loading {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      color: black;
+      margin: 10px;
+      background-color: rgba(142, 255, 236, 0.1);
+
+      >div {
+        background-color: transparent;
+        backdrop-filter: blur(3px) sepia(0.4);
+        padding: 50px;
+        border-radius: 50px;
+        animation: blobb 0.5s ease-in-out infinite;
+
+        @keyframes blobb {
+          10% {
+            transform: scale(1);
+            border-radius: 120px;
+          }
+
+          30% {
+            border-radius: 100px;
+          }
+
+          100% {
+            transform: scale(0.2);
+            border-radius: 50px;
+          }
+        }
+
+      }
+    }
+
+  }
+
+  .template {
+    --padding: 10px;
+    flex: 0 1 60%;
+    padding: var(--padding);
+
+    select,
+    textarea,
+    input,
+    button {
+      padding: var(--padding);
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    select {
+      width: 100%;
+      text-align: center;
+      outline: none;
+
+      option {
+        text-align: center;
+      }
+    }
+
+    .editor {
+      display: flex;
+      flex-direction: row;
+      height: calc(100% - calc(var(--padding) * 2) - 20px);
+
+      textarea {
+        white-space: pre;
+        width: 100%;
+        -moz-tab-size: 2;
+        -o-tab-size: 2;
+        tab-size: 2;
+        border: 1px solid gray;
+
+        &.error {
+          border: 1px solid red;
+        }
+      }
+
+      form {
+        padding-left: 20px;
+        flex: 0 0 50%;
+
+        >div {
+
+          label {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+
+            span:nth-child(1) {
+              flex: 1 1 100%;
+            }
+
+            span:nth-child(2) {
+              color: gray;
+            }
+          }
+
+          input {
+            width: 100%;
+            margin-bottom: 1.5rem;
+          }
+        }
+
+      }
+    }
+
+    button {
+      width: 100%;
+
+    }
+  }
+}

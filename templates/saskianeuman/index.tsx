@@ -1,38 +1,49 @@
-import template from './index.json'
-import config from './config.json'
+import template from './template.json'
+import styles from './styles.json'
 
 const SaskiaNeuman = (props) => {
   const {
-    container,
-    image,
-    text,
-    flex,
-    italic,
-    values: {
+    styles: {
+      container,
+      image,
+      text,
+      flex,
+      italic,
+    },
+    fields: {
+      backgroundImage,
       artist,
-      titleSwedish,
       titleEnglish,
-      date,
-      src
+      titleSwedish,
+      startDate,
+      endDate
     },
   } = props
 
   return (
     <div style={{ ...container }}>
-      {src &&
-        <img src={src} style={{ ...image }} />
+      {backgroundImage.value &&
+        <img src={backgroundImage.value} style={{ ...image }} />
       }
       <div style={{ ...text }}>
-        <div style={{ ...flex }}>{artist}</div>
-        <div style={{ ...flex }}>{titleSwedish}</div>
-        <div style={{ ...flex, ...italic }}>— {titleEnglish}</div>
-        <div style={{ ...flex }}>{date}</div>
+        <div style={{ ...flex }}>
+          {artist.value}
+        </div>
+        <div style={{ ...flex }}>
+          {titleSwedish.value}
+        </div>
+        <div style={{ ...flex, ...italic }}>
+          {titleEnglish.value ? `— ${titleEnglish.value}` : ''}
+        </div>
+        {(startDate.value && endDate.value) &&
+          <div style={{ ...flex }}>{startDate.value}—{endDate.value}</div>
+        }
       </div>
-    </div>
+    </div >
   )
 }
 
-SaskiaNeuman.template = template
-SaskiaNeuman.config = config
+SaskiaNeuman.template = template;
+SaskiaNeuman.styles = styles;
 
 export default SaskiaNeuman;

@@ -1,0 +1,42 @@
+{
+	"name": {
+		"id": "saskianeuman",
+		"label": "Saskia Neuman"
+	},
+	"dimensions": {
+		"width": 2160,
+		"height": 2160
+	},
+	"fields": {
+		"backgroundImage": {
+			"label": "Image",
+			"type": "image",
+			"value": "http://localhost:3000/images/image1.jpg"
+		},
+		"artist": {
+			"label": "Artist name",
+			"type": "text",
+			"value": "Artist name"
+		},
+		"titleSwedish": {
+			"label": "Utställning",
+			"type": "text",
+			"value": "Svensk titel"
+		},
+		"titleEnglish": {
+			"label": "Exhibition",
+			"type": "text",
+			"value": "English title"
+		},
+		"startDate": {
+			"label": "Start date",
+			"type": "text",
+			"value": "09.11"
+		},
+		"endDate": {
+			"label": "End date",
+			"type": "text",
+			"value": "17.12.2023"
+		}
+	}
+}

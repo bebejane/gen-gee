@@ -35,13 +35,6 @@
 		"fontFamily": "ProtokollBold",
 		"fontSize": "100px"
 	},
-	"values": {
-		"artist": "Artist name",
-		"titleSwedish": "Uställning svensk titel",
-		"titleEnglish": "Exhibition english title",
-		"date": "09.11-17.12.2023",
-		"src": ""
-	},
 	"italic": {
 		"fontFamily": "ProtokollBold-Italic",
 		"font=style": "italic"

@@ -1,35 +1,35 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
-import fontFiles from '/fonts.json'
 import * as templates from '/templates'
+import fontFiles from '/fonts.json'
 
 export default async function handler(req: NextRequest, res: NextResponse) {
 
   try {
-
-    let params: any = {}
+    const { searchParams } = req.nextUrl
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
-    const name = req.nextUrl.searchParams.get('t')?.toLowerCase()
+    const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
+    const { template } = Component
 
-    if (req.nextUrl.searchParams.get('p'))
-      params = JSON.parse(req.nextUrl.searchParams.get('p'))
+    const styles = JSON.parse(searchParams.get('s') || '{}')
+    const fields = JSON.parse(searchParams.get('f') || '{}')
+    const width = parseInt(searchParams.get('w') || template.dimensions.width)
+    const height = parseInt(searchParams.get('h') || template.dimensions.height)
 
-    const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === name)]
-    const { template, config } = Component
-    const width = req.nextUrl.searchParams.get('w') ? parseInt(req.nextUrl.searchParams.get('w')) : config.dimensions.width
-    const height = req.nextUrl.searchParams.get('h') ? parseInt(req.nextUrl.searchParams.get('h')) : config.dimensions.height
+    Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
+    Object.keys(Component.template.fields).forEach((k) => fields[k] = { ...Component.template.fields[k], ...fields[k] })
 
-    Object.keys(template).forEach((k) => params[k] = { ...template[k], ...params[k] })
+    const props = { styles, fields }
 
-    return new ImageResponse(<Component {...params} />, {
+    return new ImageResponse(<Component {...props} />, {
       width,
       height,
       fonts
     })
 
   } catch (err) {
-
+    console.error(err)
     return new ImageResponse(
       <div style={{
         display: "flex",
@@ -41,7 +41,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
         <h1>Error!</h1>
         {err.message}
       </div>,
-      { width: 600, height: 400 }
+      { width: 600, height: 400, status: 500 }
     )
   }
 }
