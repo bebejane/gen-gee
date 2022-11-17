@@ -13,12 +13,11 @@ export async function generateStaticParams() {
 
 export default function Template({ params: { templateId }, searchParams }) {
 
-  const template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].template.name.id === templateId)]
+  const template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].template.id === templateId)]
   const [loading, setLoading] = useState(false)
   const [json, setJson] = useState<undefined | string>(JSON.stringify(template.styles, null, 2))
   const [valid, setValid] = useState(true)
-  const [styles, setStyles] = useState<undefined | any>(template.styles)
-  const [fields, setFields] = useState<undefined | any>(template.template.fields)
+  const [fields, setFields] = useState<undefined | any>(template?.template.fields)
   const [src, setSrc] = useState<undefined | string>();
   const jsonRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -40,7 +39,6 @@ export default function Template({ params: { templateId }, searchParams }) {
       if (!json) return
       const styles = JSON.parse(json);
       setSrc(`/api/generate?t=${templateId}&s=${encodeURIComponent(JSON.stringify(styles))}&f=${encodeURIComponent(JSON.stringify(fields))}&r=${Math.random()}`)
-      setStyles(styles)
     } catch (err) {
       alert('Not valid JSON!')
     }
@@ -70,12 +68,8 @@ export default function Template({ params: { templateId }, searchParams }) {
   return (
     <div className={s.container}>
       <div className={s.image}>
-        {templateId &&
-          <img src={src} onLoad={() => setLoading(false)} onError={() => setLoading(false)} />
-        }
-        {loading &&
-          <div className={s.loading}><div></div></div>
-        }
+        <img src={src} onLoad={() => setLoading(false)} onError={() => setLoading(false)} />
+        {loading && <div className={s.loading}><div></div></div>}
       </div>
       <div className={s.template}>
         <div className={s.editor}>

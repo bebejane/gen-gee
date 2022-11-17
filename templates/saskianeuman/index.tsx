@@ -1,7 +1,7 @@
 import template from './template.json'
 import styles from './styles.json'
 
-const SaskiaNeuman = (props) => {
+const SaskiaNeuman = (props: any) => {
   const {
     styles: {
       container,

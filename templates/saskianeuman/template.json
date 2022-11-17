@@ -1,17 +1,13 @@
 {
-	"name": {
-		"id": "saskianeuman",
-		"label": "Saskia Neuman"
-	},
-	"dimensions": {
-		"width": 2160,
-		"height": 2160
-	},
+	"id": "saskianeuman",
+	"name": "Saskia Neuman",
+	"width": 2160,
+	"height": 2160,
 	"fields": {
 		"backgroundImage": {
 			"label": "Image",
 			"type": "image",
-			"value": "http://localhost:3000/images/image1.jpg"
+			"value": "https://social-gen.vercel.app/images/image2.jpg"
 		},
 		"artist": {
 			"label": "Artist name",

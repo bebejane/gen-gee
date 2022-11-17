@@ -12,9 +12,9 @@ export default function Home() {
     <div className={s.container}>
       <h1>Templates</h1>
       <ul>
-        {templates.map(({ name: { id, label } }, idx) =>
+        {templates.map(({ id, name }, idx) =>
           <Link key={idx} href={`/${id}`}>
-            {label}
+            {name}
           </Link>
         )}
       </ul>
