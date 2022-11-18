@@ -10,15 +10,15 @@ export default async function handler(req: NextRequest, res: NextResponse) {
     const { searchParams } = req.nextUrl
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
-    const { template } = Component
+    const { config } = Component
 
     const styles = JSON.parse(searchParams.get('s') || '{}')
     const fields = JSON.parse(searchParams.get('f') || '{}')
-    const width = parseInt(searchParams.get('w') || template.width)
-    const height = parseInt(searchParams.get('h') || template.height)
+    const width = parseInt(searchParams.get('w') || config.width)
+    const height = parseInt(searchParams.get('h') || config.height)
 
     Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
-    Object.keys(Component.template.fields).forEach((k) => fields[k] = { ...Component.template.fields[k], ...fields[k] })
+    Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
     const props = { styles, fields }
 

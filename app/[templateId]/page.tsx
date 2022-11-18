@@ -7,17 +7,18 @@ import { useKeys } from 'rooks'
 
 export async function generateStaticParams() {
   return Object.keys(allTemplates).map(k => {
-    return { templateId: allTemplates[k].template.id }
+    return { templateId: allTemplates[k].config.id }
   })
 }
 
 export default function Template({ params: { templateId } }) {
 
-  const template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].template.id === templateId)]
+  const Template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)]
+  const template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)]
   const [loading, setLoading] = useState(false)
   const [json, setJson] = useState<undefined | string>(JSON.stringify(template?.styles, null, 2))
   const [valid, setValid] = useState(true)
-  const [fields, setFields] = useState<undefined | any>(template?.template.fields)
+  const [fields, setFields] = useState<undefined | any>(template?.config.fields)
   const [src, setSrc] = useState<undefined | string>();
   const jsonRef = useRef<HTMLTextAreaElement | null>(null)
 

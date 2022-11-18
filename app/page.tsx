@@ -6,7 +6,7 @@ import * as allTemplates from '/templates'
 
 export default function Home() {
 
-  const templates = Object.keys(allTemplates).map(k => allTemplates[k].template)
+  const templates = Object.keys(allTemplates).map(k => allTemplates[k].config)
 
   return (
     <div className={s.container}>

@@ -1,4 +1,4 @@
-import template from './template.json'
+import config from './config.json'
 import styles from './styles.json'
 
 const SaskiaNeuman = (props: any) => {
@@ -10,14 +10,16 @@ const SaskiaNeuman = (props: any) => {
       flex,
       italic,
     },
-    fields: {
-      backgroundImage,
-      artist,
-      titleEnglish,
-      titleSwedish,
-      startDate,
-      endDate
-    },
+    config: {
+      fields: {
+        backgroundImage,
+        artist,
+        titleEnglish,
+        titleSwedish,
+        startDate,
+        endDate
+      },
+    }
   } = props
 
   return (
@@ -43,7 +45,7 @@ const SaskiaNeuman = (props: any) => {
   )
 }
 
-SaskiaNeuman.template = template;
+SaskiaNeuman.config = config;
 SaskiaNeuman.styles = styles;
 
 export default SaskiaNeuman;
