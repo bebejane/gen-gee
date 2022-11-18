@@ -7,15 +7,15 @@ import { useKeys } from 'rooks'
 
 export async function generateStaticParams() {
   return Object.keys(allTemplates).map(k => {
-    return { templateId: allTemplates[k].template.name.id }
+    return { templateId: allTemplates[k].template.id }
   })
 }
 
-export default function Template({ params: { templateId }, searchParams }) {
+export default function Template({ params: { templateId } }) {
 
   const template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].template.id === templateId)]
   const [loading, setLoading] = useState(false)
-  const [json, setJson] = useState<undefined | string>(JSON.stringify(template.styles, null, 2))
+  const [json, setJson] = useState<undefined | string>(JSON.stringify(template?.styles, null, 2))
   const [valid, setValid] = useState(true)
   const [fields, setFields] = useState<undefined | any>(template?.template.fields)
   const [src, setSrc] = useState<undefined | string>();
@@ -45,7 +45,12 @@ export default function Template({ params: { templateId }, searchParams }) {
   }
   useEffect(() => { update() }, [])
 
-  useKeys(["Meta", "s"], (e) => {
+  useKeys(["MetaLeft", "s"], (e) => {
+    e.preventDefault()
+    update()
+  }, { when: true, preventLostKeyup: true });
+
+  useKeys(["MetaRight", "s"], (e) => {
     e.preventDefault()
     update()
   }, { when: true, preventLostKeyup: true });

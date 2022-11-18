@@ -68,6 +68,8 @@
     --padding: 10px;
     flex: 0 1 60%;
     padding: var(--padding);
+    background-color: rgb(255, 255, 255);
+    color: #000;
 
     select,
     textarea,
@@ -129,7 +131,7 @@
 
           input {
             width: 100%;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
           }
         }
 
