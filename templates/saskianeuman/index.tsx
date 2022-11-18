@@ -10,15 +10,13 @@ const SaskiaNeuman = (props: any) => {
       flex,
       italic,
     },
-    config: {
-      fields: {
-        backgroundImage,
-        artist,
-        titleEnglish,
-        titleSwedish,
-        startDate,
-        endDate
-      },
+    fields: {
+      backgroundImage,
+      artist,
+      titleEnglish,
+      titleSwedish,
+      startDate,
+      endDate
     }
   } = props
 
