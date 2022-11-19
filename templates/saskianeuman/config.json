@@ -33,6 +33,25 @@
 			"label": "End date",
 			"type": "text",
 			"value": "17.12.2023"
+		},
+		"alignText": {
+			"label": "Text align",
+			"type": "select",
+			"value": "flex-start",
+			"options": [
+				{
+					"label": "Left",
+					"value": "flex-start"
+				},
+				{
+					"label": "Center",
+					"value": "center"
+				},
+				{
+					"label": "Right",
+					"value": "Right"
+				}
+			]
 		}
 	}
 }

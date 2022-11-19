@@ -7,6 +7,7 @@ import fontFiles from '/fonts.json'
 export default async function handler(req: NextRequest, res: NextResponse) {
 
   try {
+
     const { searchParams } = req.nextUrl
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
@@ -20,7 +21,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
     Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
-    const props = { styles, fields }
+    const props = { styles, config: { ...Component.config, width, height, fields } }
 
     return new ImageResponse(<Component {...props} />, {
       width,

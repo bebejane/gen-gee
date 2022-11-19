@@ -10,13 +10,20 @@ const SaskiaNeuman = (props: any) => {
       flex,
       italic,
     },
-    fields: {
-      backgroundImage,
-      artist,
-      titleEnglish,
-      titleSwedish,
-      startDate,
-      endDate
+    config: {
+      id,
+      name,
+      width,
+      height,
+      fields: {
+        backgroundImage,
+        artist,
+        titleEnglish,
+        titleSwedish,
+        startDate,
+        endDate,
+        alignText
+      }
     }
   } = props
 
@@ -25,7 +32,7 @@ const SaskiaNeuman = (props: any) => {
       {backgroundImage.value &&
         <img src={backgroundImage.value} style={{ ...image }} />
       }
-      <div style={{ ...text }}>
+      <div style={{ ...text, alignItems: alignText }}>
         <div style={{ ...flex }}>
           {artist.value}
         </div>
