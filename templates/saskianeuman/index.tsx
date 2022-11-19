@@ -1,49 +1,35 @@
 import config from './config.json'
 import styles from './styles.json'
 
-const SaskiaNeuman = (props: any) => {
-  const {
-    styles: {
-      container,
-      image,
-      text,
-      flex,
-      italic,
-    },
-    config: {
-      id,
-      name,
-      width,
-      height,
-      fields: {
-        backgroundImage,
-        artist,
-        titleEnglish,
-        titleSwedish,
-        startDate,
-        endDate,
-        alignText
-      }
-    }
-  } = props
+const SaskiaNeuman = ({
+  styles,
+  values: {
+    backgroundImage,
+    artist,
+    titleEnglish,
+    titleSwedish,
+    startDate,
+    endDate,
+    alignText
+  } }) => {
 
   return (
-    <div style={{ ...container }}>
-      {backgroundImage.value &&
-        <img src={backgroundImage.value} style={{ ...image }} />
+    <div style={{ ...styles.container }}>
+      {backgroundImage &&
+        <img src={backgroundImage} style={{ ...styles.image }} />
       }
-      <div style={{ ...text, alignItems: alignText.value }}>
-        <div style={{ ...flex }}>
-          {artist.value}
+      <div style={{ ...styles.text, alignItems: alignText }}>
+        <div style={{ ...styles.flex }}>
+          {artist}
         </div>
-        <div style={{ ...flex }}>
-          {titleSwedish.value}
+        <div style={{ ...styles.flex }}>
+          {titleSwedish}
         </div>
-        <div style={{ ...flex, ...italic }}>
-          {titleEnglish.value ? `— ${titleEnglish.value}` : ''}
+        <div style={{ ...styles.flex, ...styles.italic }}>
+          {titleEnglish ? `— ${titleEnglish}` : ''}
         </div>
-        {(startDate.value && endDate.value) &&
-          <div style={{ ...flex }}>{startDate.value}—{endDate.value}</div>
+        {(startDate && endDate) &&
+          <div style={{ ...styles.flex }}>{startDate}—{endDate}</div>
         }
       </div>
     </div >

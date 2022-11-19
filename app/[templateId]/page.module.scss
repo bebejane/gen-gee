@@ -16,7 +16,7 @@
     flex: 0 0 40%;
     display: flex;
     align-items: center;
-    background-color: beige;
+    background-color: rgb(255, 255, 255);
 
     img {
       max-width: 40vw;
@@ -68,7 +68,7 @@
     --padding: 10px;
     flex: 0 1 60%;
     padding: var(--padding);
-    background-color: rgb(220, 181, 137);
+    background-color: rgb(175, 175, 175);
 
     color: #000;
 
@@ -79,6 +79,7 @@
       padding: var(--padding);
       outline: none;
       margin-bottom: 10px;
+      width: 100%;
     }
 
     .editor {
@@ -86,21 +87,7 @@
       flex-direction: row;
       height: calc(100% - calc(var(--padding) * 2) - 20px);
 
-      textarea {
-        white-space: pre;
-        width: 100%;
-        -moz-tab-size: 2;
-        -o-tab-size: 2;
-        tab-size: 2;
-        border: 1px solid gray;
-
-        &.error {
-          border: 1px solid red;
-        }
-      }
-
       form {
-        padding-left: 20px;
         flex: 0 0 50%;
 
         >div {
@@ -127,11 +114,24 @@
         }
 
       }
+
+      >textarea {
+        margin-left: 20px;
+        white-space: pre;
+        width: 100%;
+        -moz-tab-size: 2;
+        -o-tab-size: 2;
+        tab-size: 2;
+        border: 1px solid gray;
+
+        &.error {
+          border: 1px solid red;
+        }
+      }
     }
   }
 
   button {
     width: 100%;
-
   }
 }

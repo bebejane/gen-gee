@@ -21,7 +21,8 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
-    const props = { styles, config: { ...Component.config, width, height, fields } }
+    const values = Object.keys(fields).reduce((obj, k) => obj = { ...obj, [k]: fields[k].value }, {})
+    const props = { styles, values }
 
 
     const res = new ImageResponse(<Component {...props} />, {

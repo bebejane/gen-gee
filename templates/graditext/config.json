@@ -1,0 +1,85 @@
+{
+	"id": "graditext",
+	"name": "Gradi Text",
+	"width": 1000,
+	"height": 1000,
+	"fields": {
+		"text": {
+			"label": "Text",
+			"type": "textarea",
+			"value": "Text..."
+		},
+		"gradientFrom": {
+			"label": "Gradient from",
+			"type": "text",
+			"value": "red"
+		},
+		"gradientTo": {
+			"label": "Gradient to",
+			"type": "text",
+			"value": "pink"
+		},
+		"gradientDegree": {
+			"label": "Gradient deg",
+			"type": "text",
+			"value": "75"
+		},
+		"blockAlign": {
+			"label": "Block align",
+			"type": "select",
+			"value": "flex-start",
+			"options": [
+				{
+					"label": "Left",
+					"value": "flex-start"
+				},
+				{
+					"label": "Center",
+					"value": "center"
+				},
+				{
+					"label": "Right",
+					"value": "flex-end"
+				}
+			]
+		},
+		"textAlign": {
+			"label": "Text align",
+			"type": "select",
+			"value": "left",
+			"options": [
+				{
+					"label": "Left",
+					"value": "left"
+				},
+				{
+					"label": "Center",
+					"value": "center"
+				},
+				{
+					"label": "Right",
+					"value": "right"
+				}
+			]
+		},
+		"fontSize": {
+			"label": "Font size",
+			"type": "select",
+			"value": "80px",
+			"options": [
+				{
+					"label": "Small",
+					"value": "40px"
+				},
+				{
+					"label": "Medium",
+					"value": "80px"
+				},
+				{
+					"label": "Large",
+					"value": "120px"
+				}
+			]
+		}
+	}
+}

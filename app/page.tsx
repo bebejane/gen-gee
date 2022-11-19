@@ -13,9 +13,11 @@ export default function Home() {
       <h1>Templates</h1>
       <ul>
         {templates.map(({ id, name }, idx) =>
-          <Link key={idx} href={`/${id}`}>
-            {name}
-          </Link>
+          <li key={idx} >
+            <Link href={`/${id}`}>
+              {name}
+            </Link>
+          </li>
         )}
       </ul>
     </div>

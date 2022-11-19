@@ -13,7 +13,6 @@ export async function generateStaticParams() {
 
 export default function Template({ params: { templateId } }) {
 
-  const Template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)]
   const template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)]
   const [loading, setLoading] = useState(false)
   const [json, setJson] = useState<undefined | string>(JSON.stringify(template?.styles, null, 2))
@@ -21,6 +20,10 @@ export default function Template({ params: { templateId } }) {
   const [fields, setFields] = useState<undefined | any>(template?.config.fields)
   const [src, setSrc] = useState<undefined | string>();
   const jsonRef = useRef<HTMLTextAreaElement | null>(null)
+
+  const updateField = (id: string, value: string) => {
+    setFields({ ...fields, [id]: { ...fields[id], value } });
+  }
 
   const handleJsonText = (evt: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (evt.key !== 'Tab')
@@ -44,6 +47,7 @@ export default function Template({ params: { templateId } }) {
       alert('Not valid JSON!')
     }
   }
+
   useEffect(() => { update() }, [])
 
   useKeys(["MetaLeft", "s"], (e) => {
@@ -79,13 +83,6 @@ export default function Template({ params: { templateId } }) {
       </div>
       <div className={s.template}>
         <div className={s.editor}>
-          <textarea
-            ref={jsonRef}
-            value={json || ''}
-            onKeyDown={handleJsonText}
-            onChange={(e) => setJson(e.target.value)}
-            className={!valid ? s.error : undefined}
-          />
           <form>
             {fields && Object.keys(fields).map((k, idx) =>
               <div key={idx}>
@@ -93,23 +90,44 @@ export default function Template({ params: { templateId } }) {
                   <span>{fields[k].label}</span>
                   <span>{k}</span>
                 </label>
-                {fields[k].type === 'select' ?
-                  <select onChange={(e) => setFields({ ...fields, [k]: { ...fields[k], value: e.target.value } })}>
-                    {fields[k].options?.map(({ value, label }, idx) =>
-                      <option key={idx} value={value}>{label}</option>
-                    )}
-                  </select>
-                  :
-                  <input
-                    type={"text"}
-                    id={fields[k].id}
-                    value={fields[k].value}
-                    onChange={(e) => setFields({ ...fields, [k]: { ...fields[k], value: e.target.value } })}
-                  />
-                }
+                {(() => {
+                  switch (fields[k].type) {
+                    case 'select':
+                      return (
+                        <select value={fields[k].value} onChange={(e) => updateField(k, e.target.value)}>
+                          {fields[k].options?.map(({ value, label }, idx) =>
+                            <option key={idx} value={value}>{label}</option>
+                          )}
+                        </select>
+                      )
+                    case 'textarea':
+                      return (
+                        <textarea
+                          rows={5}
+                          onChange={(e) => updateField(k, e.target.value)} value={fields[k].value}
+                        />
+                      )
+                    default:
+                      return (
+                        <input
+                          type={"text"}
+                          id={fields[k].id}
+                          value={fields[k].value}
+                          onChange={(e) => updateField(k, e.target.value)}
+                        />
+                      )
+                  }
+                })()}
               </div>
             )}
           </form>
+          <textarea
+            ref={jsonRef}
+            value={json || ''}
+            onKeyDown={handleJsonText}
+            onChange={(e) => setJson(e.target.value)}
+            className={!valid ? s.error : undefined}
+          />
         </div>
         <button onClick={update}>Update (CMD + S)</button>
       </div>
