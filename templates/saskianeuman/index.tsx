@@ -11,13 +11,14 @@ const SaskiaNeuman = ({
     titleSwedish,
     startDate,
     endDate,
-    alignText
+    alignText,
+    objectFit
   } }) => {
 
   return (
     <div style={{ ...styles.container }}>
       {backgroundImage &&
-        <img src={backgroundImage} style={{ ...styles.image }} />
+        <img src={backgroundImage} style={{ ...styles.image, objectFit }} />
       }
       <div style={{
         ...styles.text,

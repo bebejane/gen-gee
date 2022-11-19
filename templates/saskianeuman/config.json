@@ -9,6 +9,25 @@
 			"type": "image",
 			"value": ""
 		},
+		"objectFit": {
+			"label": "Image fit",
+			"type": "select",
+			"value": "cover",
+			"options": [
+				{
+					"label": "Cover",
+					"value": "cover"
+				},
+				{
+					"label": "Contain",
+					"value": "contain"
+				},
+				{
+					"label": "Fill",
+					"value": "fill"
+				}
+			]
+		},
 		"color": {
 			"label": "Color",
 			"type": "select",
