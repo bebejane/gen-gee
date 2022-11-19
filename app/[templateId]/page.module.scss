@@ -69,7 +69,7 @@
     flex: 0 1 60%;
     padding: var(--padding);
     background-color: rgb(175, 175, 175);
-
+    max-height: 100vh;
     color: #000;
 
     select,
@@ -87,8 +87,15 @@
       flex-direction: row;
       height: calc(100% - calc(var(--padding) * 2) - 20px);
 
+      form,
+      >textarea {
+        max-height: calc(100vh - 80px);
+      }
+
       form {
         flex: 0 0 50%;
+        max-height: calc(100vh - 80px);
+        overflow-y: scroll;
 
         >div {
 

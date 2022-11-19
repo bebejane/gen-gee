@@ -13,8 +13,8 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
     const { config } = Component
 
-    const styles = JSON.parse(searchParams.get('s') || '{}')
-    const fields = JSON.parse(searchParams.get('f') || '{}')
+    const styles = searchParams.get('s') ? JSON.parse(atob(searchParams.get('s'))) : {}
+    const fields = searchParams.get('f') ? JSON.parse(atob(searchParams.get('f'))) : {}
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
 

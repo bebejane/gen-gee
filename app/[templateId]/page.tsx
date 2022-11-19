@@ -42,8 +42,10 @@ export default function Template({ params: { templateId } }) {
     try {
       if (!json) return
       const styles = JSON.parse(json);
-      setSrc(`/api/generate?t=${templateId}&s=${encodeURIComponent(JSON.stringify(styles))}&f=${encodeURIComponent(JSON.stringify(fields))}&r=${Math.random()}`)
+      setSrc(`/api/generate?t=${templateId}&s=${btoa(JSON.stringify(styles))}&f=${btoa(JSON.stringify(fields))}&r=${Math.random()}`)
     } catch (err) {
+      console.log(err);
+
       alert('Not valid JSON!')
     }
   }
