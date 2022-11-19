@@ -24,6 +24,9 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const values = Object.keys(fields).reduce((obj, k) => obj = { ...obj, [k]: fields[k].value }, {})
     const props = { styles, values }
 
+    console.log('generate image');
+    console.log(JSON.stringify(props, null, 2))
+
 
     const res = new ImageResponse(<Component {...props} />, {
       width,
