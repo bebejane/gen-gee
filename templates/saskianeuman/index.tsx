@@ -5,6 +5,7 @@ const SaskiaNeuman = ({
   styles,
   values: {
     backgroundImage,
+    color,
     artist,
     titleEnglish,
     titleSwedish,
@@ -18,7 +19,11 @@ const SaskiaNeuman = ({
       {backgroundImage &&
         <img src={backgroundImage} style={{ ...styles.image }} />
       }
-      <div style={{ ...styles.text, alignItems: alignText }}>
+      <div style={{
+        ...styles.text,
+        color,
+        alignItems: alignText
+      }}>
         <div style={{ ...styles.flex }}>
           {artist}
         </div>

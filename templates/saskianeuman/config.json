@@ -9,6 +9,21 @@
 			"type": "image",
 			"value": ""
 		},
+		"color": {
+			"label": "Color",
+			"type": "select",
+			"value": "#ffffff",
+			"options": [
+				{
+					"label": "White",
+					"value": "#ffffff"
+				},
+				{
+					"label": "Black",
+					"value": "#000000"
+				}
+			]
+		},
 		"artist": {
 			"label": "Artist name",
 			"type": "text",
