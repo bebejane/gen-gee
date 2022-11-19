@@ -49,7 +49,7 @@
 				},
 				{
 					"label": "Right",
-					"value": "Right"
+					"value": "flex-end"
 				}
 			]
 		}

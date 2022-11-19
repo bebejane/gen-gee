@@ -93,12 +93,20 @@ export default function Template({ params: { templateId } }) {
                   <span>{fields[k].label}</span>
                   <span>{k}</span>
                 </label>
-                <input
-                  type={"text"}
-                  id={fields[k].id}
-                  value={fields[k].value}
-                  onChange={(e) => setFields({ ...fields, [k]: { ...fields[k], value: e.target.value } })}
-                />
+                {fields[k].type === 'select' ?
+                  <select onChange={(e) => setFields({ ...fields, [k]: { ...fields[k], value: e.target.value } })}>
+                    {fields[k].options?.map(({ value, label }, idx) =>
+                      <option key={idx} value={value}>{label}</option>
+                    )}
+                  </select>
+                  :
+                  <input
+                    type={"text"}
+                    id={fields[k].id}
+                    value={fields[k].value}
+                    onChange={(e) => setFields({ ...fields, [k]: { ...fields[k], value: e.target.value } })}
+                  />
+                }
               </div>
             )}
           </form>

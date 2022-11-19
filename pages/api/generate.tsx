@@ -4,7 +4,7 @@ import { ImageResponse } from '@vercel/og';
 import * as templates from '/templates'
 import fontFiles from '/fonts.json'
 
-export default async function handler(req: NextRequest, res: NextResponse) {
+export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
 
   try {
 
@@ -23,11 +23,14 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
     const props = { styles, config: { ...Component.config, width, height, fields } }
 
-    return new ImageResponse(<Component {...props} />, {
+
+    const res = new ImageResponse(<Component {...props} />, {
       width,
       height,
       fonts
     })
+
+    return res;
 
   } catch (err) {
     return errorResponse(err)
@@ -49,8 +52,6 @@ const generateFont = async (opt: Omit<FontOption, 'data'>): Promise<FontOption> 
 }
 
 const errorResponse = (err: Error) => {
-
-  console.error(err)
 
   return new ImageResponse(
     <div style={{

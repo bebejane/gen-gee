@@ -81,16 +81,6 @@
       margin-bottom: 10px;
     }
 
-    select {
-      width: 100%;
-      text-align: center;
-      outline: none;
-
-      option {
-        text-align: center;
-      }
-    }
-
     .editor {
       display: flex;
       flex-direction: row;
@@ -138,10 +128,10 @@
 
       }
     }
+  }
 
-    button {
-      width: 100%;
+  button {
+    width: 100%;
 
-    }
   }
 }

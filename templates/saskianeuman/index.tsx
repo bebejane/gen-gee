@@ -32,7 +32,7 @@ const SaskiaNeuman = (props: any) => {
       {backgroundImage.value &&
         <img src={backgroundImage.value} style={{ ...image }} />
       }
-      <div style={{ ...text, alignItems: alignText }}>
+      <div style={{ ...text, alignItems: alignText.value }}>
         <div style={{ ...flex }}>
           {artist.value}
         </div>
