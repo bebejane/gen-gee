@@ -7,7 +7,7 @@
 		"backgroundImage": {
 			"label": "Image",
 			"type": "image",
-			"value": "https://social-gen.vercel.app/images/image2.jpg"
+			"value": ""
 		},
 		"artist": {
 			"label": "Artist name",
@@ -27,12 +27,12 @@
 		"startDate": {
 			"label": "Start date",
 			"type": "text",
-			"value": "09.11"
+			"value": "DD.MM"
 		},
 		"endDate": {
 			"label": "End date",
 			"type": "text",
-			"value": "17.12.2023"
+			"value": "DD.MM.YYYY"
 		},
 		"alignText": {
 			"label": "Text align",
