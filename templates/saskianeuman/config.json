@@ -43,6 +43,25 @@
 				}
 			]
 		},
+		"alignText": {
+			"label": "Text align",
+			"type": "select",
+			"value": "flex-start",
+			"options": [
+				{
+					"label": "Left",
+					"value": "flex-start"
+				},
+				{
+					"label": "Center",
+					"value": "center"
+				},
+				{
+					"label": "Right",
+					"value": "flex-end"
+				}
+			]
+		},
 		"artist": {
 			"label": "Artist name",
 			"type": "text",
@@ -67,25 +86,6 @@
 			"label": "End date",
 			"type": "text",
 			"value": "DD.MM.YYYY"
-		},
-		"alignText": {
-			"label": "Text align",
-			"type": "select",
-			"value": "flex-start",
-			"options": [
-				{
-					"label": "Left",
-					"value": "flex-start"
-				},
-				{
-					"label": "Center",
-					"value": "center"
-				},
-				{
-					"label": "Right",
-					"value": "flex-end"
-				}
-			]
 		}
 	}
 }
