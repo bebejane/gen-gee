@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
 import * as templates from '/templates'
 import fontFiles from '/fonts.json'
+import { Base64 } from '/lib/utils';
 
 export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
 
@@ -13,11 +14,10 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
     const { config } = Component
 
-    const styles = searchParams.get('s') ? JSON.parse(atob(searchParams.get('s'))) : {}
-    const fields = searchParams.get('f') ? JSON.parse(atob(searchParams.get('f'))) : {}
+    const styles = searchParams.get('s') ? Base64.decode(searchParams.get('s')) : {}
+    const fields = searchParams.get('f') ? Base64.decode(searchParams.get('f')) : {}
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
-
     //Object.keys(fields).forEach(k => { if (fields[k].value === '') throw new Error(`field: "${k}" is empty!`) })
 
     Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })

@@ -4,6 +4,7 @@ import s from './page.module.scss'
 import * as allTemplates from '/templates'
 import { useRef, useEffect, useState } from 'react'
 import { useKeys } from 'rooks'
+import { Base64 } from '/lib/utils';
 
 export async function generateStaticParams() {
   return Object.keys(allTemplates).map(k => {
@@ -42,11 +43,8 @@ export default function Template({ params: { templateId } }) {
     try {
       if (!json) return
       const styles = JSON.parse(json);
-      console.log(JSON.parse(atob(btoa(JSON.stringify(styles, null)))));
-      //console.log(JSON.stringify(styles, 'base64'));
 
-
-      setSrc(`/api/generate?t=${templateId}&s=${btoa(JSON.stringify(styles))}&f=${btoa(JSON.stringify(fields))}&r=${Math.random()}`)
+      setSrc(`/api/generate?t=${templateId}&s=${Base64.encode(styles)}&f=${Base64.encode(fields)}&r=${Math.random()}`)
     } catch (err) {
       console.log(err);
 

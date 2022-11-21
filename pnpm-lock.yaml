@@ -9,6 +9,7 @@ specifiers:
   dotenv: ^16.0.3
   eslint: 8.27.0
   eslint-config-next: 13.0.3
+  js-base64: ^3.7.3
   next: 13.0.4
   react: 18.2.0
   react-dom: 18.2.0
@@ -26,6 +27,7 @@ dependencies:
   dotenv: 16.0.3
   eslint: 8.27.0
   eslint-config-next: 13.0.3_rmayb2veg2btbq6mbmnyivgasy
+  js-base64: 3.7.3
   next: 13.0.4_m5sxuueb27gk6ddc5gums6vtgq
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1394,6 +1396,10 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+    dev: false
+
+  /js-base64/3.7.3:
+    resolution: {integrity: sha512-PAr6Xg2jvd7MCR6Ld9Jg3BmTcjYsHEBx1VlwEwULb/qowPf5VD9kEMagj23Gm7JRnSvE/Da/57nChZjnvL8v6A==}
     dev: false
 
   /js-sdsl/4.1.5:
