@@ -84,7 +84,7 @@ export default function Template({ params: { templateId } }) {
   return (
     <div className={s.container}>
       <div className={s.image}>
-        <img src={src} onLoad={() => setLoading(false)} onError={() => setLoading(false)} />
+        <img src={src} onLoad={() => setLoading(false)} onError={(e) => setLoading(false)} />
         {loading && <div className={s.loading}><div></div></div>}
       </div>
       <div className={s.template}>

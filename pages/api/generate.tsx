@@ -18,6 +18,11 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
 
+    Object.keys(fields).forEach(k => {
+      if (fields[k].value === '')
+        throw new Error(`field: "${k}" is empty!`)
+    })
+
     Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
@@ -25,8 +30,6 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const props = { styles, values, config: Component.config }
 
     console.log('generate image');
-    //console.log(JSON.stringify(props, null, 2))
-
 
     const res = new ImageResponse(<Component {...props} />, {
       width,
@@ -61,7 +64,7 @@ const errorResponse = (err: Error) => {
     <div style={{
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
+      alignItems: "flex-start",
       padding: "20px",
       color: "red"
     }}>
@@ -72,6 +75,4 @@ const errorResponse = (err: Error) => {
   )
 }
 
-export const config = {
-  runtime: 'experimental-edge',
-};
+export const config = { runtime: 'experimental-edge' };

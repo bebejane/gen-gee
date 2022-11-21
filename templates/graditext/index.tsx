@@ -1,5 +1,5 @@
-import config from './config.json'
-import styles from './styles.json'
+import defaultConfig from './config.json'
+import defaultStyles from './styles.json'
 import interpolate from 'color-interpolate'
 
 const GradiText = ({
@@ -20,10 +20,10 @@ const GradiText = ({
   }
 }) => {
 
-  const rows = parseInt(gradientCols);
-  const cols = parseInt(gradientRows);
+  const rows = parseInt(gradientRows);
+  const cols = parseInt(gradientCols);
   const steps = cols * rows
-  const cmap = interpolate([gradientFrom, gradientTo], steps);
+  const cmap = interpolate([gradientFrom, gradientTo]);
   const colors = new Array(steps).fill(0).map((el, idx) => cmap(idx / steps))
 
   return (
@@ -47,7 +47,7 @@ const GradiText = ({
   )
 }
 
-GradiText.config = config;
-GradiText.styles = styles;
+GradiText.config = defaultConfig;
+GradiText.styles = defaultStyles;
 
 export default GradiText;

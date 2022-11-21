@@ -17,12 +17,12 @@
 		"gradientTo": {
 			"label": "Gradient to",
 			"type": "text",
-			"value": "#FF00E4"
+			"value": "#FF0000"
 		},
 		"gradientCols": {
 			"label": "Columns",
 			"type": "text",
-			"value": "4"
+			"value": "5"
 		},
 		"gradientRows": {
 			"label": "Rows",
