@@ -14,13 +14,12 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
     const { config } = Component
 
-    const styles = searchParams.get('s') ? Base64.decode(searchParams.get('s')) : {}
+    const styles = searchParams.get('s') ? Base64.decode(searchParams.get('s')) : Component.styles
     const fields = searchParams.get('f') ? Base64.decode(searchParams.get('f')) : {}
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
-    //Object.keys(fields).forEach(k => { if (fields[k].value === '') throw new Error(`field: "${k}" is empty!`) })
 
-    Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
+    //Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
     const values = Object.keys(fields).reduce((obj, k) => obj = { ...obj, [k]: fields[k].value }, {})
