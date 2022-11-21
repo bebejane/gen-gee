@@ -18,10 +18,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
 
-    Object.keys(fields).forEach(k => {
-      if (fields[k].value === '')
-        throw new Error(`field: "${k}" is empty!`)
-    })
+    //Object.keys(fields).forEach(k => { if (fields[k].value === '') throw new Error(`field: "${k}" is empty!`) })
 
     Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
