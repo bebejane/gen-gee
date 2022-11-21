@@ -42,6 +42,10 @@ export default function Template({ params: { templateId } }) {
     try {
       if (!json) return
       const styles = JSON.parse(json);
+      console.log(JSON.parse(atob(btoa(JSON.stringify(styles, null)))));
+      //console.log(JSON.stringify(styles, 'base64'));
+
+
       setSrc(`/api/generate?t=${templateId}&s=${btoa(JSON.stringify(styles))}&f=${btoa(JSON.stringify(fields))}&r=${Math.random()}`)
     } catch (err) {
       console.log(err);

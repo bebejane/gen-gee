@@ -22,10 +22,10 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
     const values = Object.keys(fields).reduce((obj, k) => obj = { ...obj, [k]: fields[k].value }, {})
-    const props = { styles, values }
+    const props = { styles, values, config: Component.config }
 
     console.log('generate image');
-    console.log(JSON.stringify(props, null, 2))
+    //console.log(JSON.stringify(props, null, 2))
 
 
     const res = new ImageResponse(<Component {...props} />, {

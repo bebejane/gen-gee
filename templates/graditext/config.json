@@ -12,17 +12,22 @@
 		"gradientFrom": {
 			"label": "Gradient from",
 			"type": "text",
-			"value": "red"
+			"value": "#F4FF00"
 		},
 		"gradientTo": {
 			"label": "Gradient to",
 			"type": "text",
-			"value": "pink"
+			"value": "#FF00E4"
 		},
-		"gradientDegree": {
-			"label": "Gradient deg",
+		"gradientCols": {
+			"label": "Columns",
 			"type": "text",
-			"value": "75"
+			"value": "4"
+		},
+		"gradientRows": {
+			"label": "Rows",
+			"type": "text",
+			"value": "4"
 		},
 		"blockAlign": {
 			"label": "Block align",
