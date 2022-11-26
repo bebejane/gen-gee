@@ -33,6 +33,10 @@
 		"fontFamily": "ProtokollBold",
 		"fontSize": "100px"
 	},
+	"paragraph": {
+		"display": "flex",
+		"minHeight": "1em"
+	},
 	"italic": {
 		"fontFamily": "ProtokollBold-Italic",
 		"font=style": "italic"

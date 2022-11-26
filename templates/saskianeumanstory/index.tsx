@@ -18,11 +18,11 @@ const SaskiaNeumanStory = ({
       }
       <div style={{ ...styles.text, color }}>
         {text.split('\n').map((line, key) =>
-          <div key={key}>{line}</div>
+          <div style={{ ...styles.paragraph }} key={key}>{line}</div>
         )}
       </div>
     </div>
-  )   
+  )
 }
 
 SaskiaNeumanStory.config = config;
