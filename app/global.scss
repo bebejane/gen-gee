@@ -19,8 +19,38 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
   }
+}
+
+@font-face {
+  font-family: "ProtokollBold-Italic";
+  src: url("/fonts/ProtokollBold-Italic.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ProtokollBold";
+  src: url("/fonts/ProtokollBold.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Dominicale";
+  src: url("/fonts/Dominicale.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("/fonts/Helvetica.woff");
+  font-weight: normal;
+  font-style: normal;
 }

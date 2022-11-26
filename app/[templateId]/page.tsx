@@ -5,6 +5,7 @@ import * as allTemplates from '/templates'
 import { useRef, useEffect, useState } from 'react'
 import { useKeys } from 'rooks'
 import { Base64 } from '/lib/utils';
+import TemplatePreview from '/app/TemplatePreview'
 
 export async function generateStaticParams() {
   return Object.keys(allTemplates).map(k => {
@@ -14,7 +15,9 @@ export async function generateStaticParams() {
 
 export default function Template({ params: { templateId } }) {
 
-  const template = allTemplates[Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)]
+  const templateName = Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)
+  const template = allTemplates[templateName]
+
   const [loading, setLoading] = useState(false)
   const [json, setJson] = useState<undefined | string>(JSON.stringify(template?.styles, null, 2))
   const [valid, setValid] = useState(true)
@@ -79,11 +82,18 @@ export default function Template({ params: { templateId } }) {
     }
   }, [json])
 
+
+  const values = {}
+  Object.keys(template.config.fields).forEach((k) => values[k] = fields[k].value || template.config.fields[k].value)
+
   return (
     <div className={s.container}>
       <div className={s.image}>
-        <img src={src} onLoad={() => setLoading(false)} onError={(e) => setLoading(false)} />
-        {loading && <div className={s.loading}><div></div></div>}
+        <TemplatePreview
+          name={templateName}
+          styles={template.styles}
+          values={values}
+        />
       </div>
       <div className={s.template}>
         <div className={s.editor}>
@@ -109,6 +119,15 @@ export default function Template({ params: { templateId } }) {
                         <textarea
                           rows={5}
                           onChange={(e) => updateField(k, e.target.value)} value={fields[k].value}
+                        />
+                      )
+                    case 'image':
+                      return (
+                        <input
+                          type={"text"}
+                          id={fields[k].id}
+                          value={fields[k].value}
+                          onChange={(e) => updateField(k, e.target.value)}
                         />
                       )
                     default:

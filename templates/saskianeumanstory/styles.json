@@ -23,7 +23,7 @@
 		"display": "flex",
 		"alignItems": "flex-start",
 		"justifyContent": "center",
-		"text-align": "left",
+		"textAlign": "left",
 		"padding": "6rem",
 		"zIndex": 2,
 		"width": "100%",

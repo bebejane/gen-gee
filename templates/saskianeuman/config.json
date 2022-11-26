@@ -7,7 +7,7 @@
 		"backgroundImage": {
 			"label": "Image",
 			"type": "image",
-			"value": ""
+			"value": "http://localhost:3000/images/image1.jpg"
 		},
 		"artist": {
 			"label": "Artist name",
