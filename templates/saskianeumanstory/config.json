@@ -1,0 +1,71 @@
+{
+	"id": "saskianeumanstory",
+	"name": "Saskia Neuman (Instagram story)",
+	"width": 2160,
+	"height": 3840,
+	"fields": {
+		"backgroundImage": {
+			"label": "Image",
+			"type": "image",
+			"value": ""
+		},
+		"objectFit": {
+			"label": "Image fit",
+			"type": "select",
+			"value": "cover",
+			"options": [
+				{
+					"label": "Cover",
+					"value": "cover"
+				},
+				{
+					"label": "Contain",
+					"value": "contain"
+				},
+				{
+					"label": "Fill",
+					"value": "fill"
+				}
+			]
+		},
+		"text": {
+			"type": "textarea",
+			"value": "Text...",
+			"label": "Text"
+		},
+		"alignText": {
+			"label": "Text align",
+			"type": "select",
+			"value": "center",
+			"options": [
+				{
+					"label": "Top",
+					"value": "flex-start"
+				},
+				{
+					"label": "Center",
+					"value": "center"
+				},
+				{
+					"label": "Bottom",
+					"value": "flex-end"
+				}
+			]
+		},
+		"color": {
+			"label": "Text color",
+			"type": "select",
+			"value": "#ffffff",
+			"options": [
+				{
+					"label": "White",
+					"value": "#ffffff"
+				},
+				{
+					"label": "Black",
+					"value": "#000000"
+				}
+			]
+		}
+	}
+}

@@ -1,6 +1,6 @@
 {
 	"id": "saskianeuman",
-	"name": "Saskia Neuman",
+	"name": "Saskia Neuman (Instagram post)",
 	"width": 2160,
 	"height": 2160,
 	"fields": {
@@ -8,6 +8,31 @@
 			"label": "Image",
 			"type": "image",
 			"value": ""
+		},
+		"artist": {
+			"label": "Artist name",
+			"type": "text",
+			"value": "Artist name"
+		},
+		"titleSwedish": {
+			"label": "Utställning",
+			"type": "text",
+			"value": "Svensk titel"
+		},
+		"titleEnglish": {
+			"label": "Exhibition",
+			"type": "text",
+			"value": "English title"
+		},
+		"startDate": {
+			"label": "Start date",
+			"type": "text",
+			"value": "DD.MM"
+		},
+		"endDate": {
+			"label": "End date",
+			"type": "text",
+			"value": "DD.MM.YYYY"
 		},
 		"objectFit": {
 			"label": "Image fit",
@@ -61,31 +86,6 @@
 					"value": "flex-end"
 				}
 			]
-		},
-		"artist": {
-			"label": "Artist name",
-			"type": "text",
-			"value": "Artist name"
-		},
-		"titleSwedish": {
-			"label": "Utställning",
-			"type": "text",
-			"value": "Svensk titel"
-		},
-		"titleEnglish": {
-			"label": "Exhibition",
-			"type": "text",
-			"value": "English title"
-		},
-		"startDate": {
-			"label": "Start date",
-			"type": "text",
-			"value": "DD.MM"
-		},
-		"endDate": {
-			"label": "End date",
-			"type": "text",
-			"value": "DD.MM.YYYY"
 		}
 	}
 }
