@@ -1,8 +1,8 @@
 {
 	"id": "saskianeumanstory",
 	"name": "Saskia Neuman (Instagram story)",
-	"width": 2160,
-	"height": 3840,
+	"width": 1080,
+	"height": 1920,
 	"fields": {
 		"backgroundImage": {
 			"label": "Image",

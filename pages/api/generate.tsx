@@ -26,6 +26,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const props = { styles, values, config: Component.config }
 
     console.log('generate image');
+    console.log(props)
 
     const res = new ImageResponse(<Component {...props} />, {
       width,
