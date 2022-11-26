@@ -8,7 +8,7 @@
 		"textAlign": "right",
 		"alignItems": "flex-start",
 		"justifyContent": "center",
-		"backgroundColor": "#ffffff"
+		"backgroundColor": "#00000"
 	},
 	"image": {
 		"position": "absolute",
