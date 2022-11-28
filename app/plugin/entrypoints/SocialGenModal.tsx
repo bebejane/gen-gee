@@ -1,4 +1,6 @@
 import s from './SocialGenModal.module.scss'
+import * as allTemplates from '/templates'
+import TemplatePreview from '/components/TemplatePreview'
 import { RenderModalCtx } from 'datocms-plugin-sdk';
 import { Canvas, Button, Form, TextField, SelectField } from 'datocms-react-ui';
 import { generateSourceUrl } from '../utils';
@@ -16,6 +18,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
   const serverUrl = ctx.plugin.attributes.parameters.serverUrl as string
   const parameters = ctx.parameters as ConfigParameters & { fields: Fields | undefined }
   const { templateId } = parameters;
+  const templateName = Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)
   const savedFields = { ...parameters.fields || {} }
 
   const [template, setTemplate] = useState<any | undefined>();
@@ -96,19 +99,16 @@ export default function SocialGenModal({ ctx }: PropTypes) {
     })()
   }, [templateId, setFields, ctx, parameters, serverUrl])
 
+  const values = {}
+  fields && Object.keys(fields).forEach((k) => values[k] = fields[k].value)
+
+
   return (
     <Canvas ctx={ctx}>
       <div className={s.modal}>
         <div className={s.editor}>
           <figure>
-            <img
-              src={imageSrc}
-              onLoad={() => setLoading(false)}
-              onError={() => setLoading(false)}
-            />
-            {loading &&
-              <div className={s.loading}><Loader color={'#ffffff'} size={40} /></div>
-            }
+            <TemplatePreview name={templateName} values={values} />
           </figure>
           <div className={s.fields}>
             <Form>

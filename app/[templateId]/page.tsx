@@ -2,10 +2,10 @@
 
 import s from './page.module.scss'
 import * as allTemplates from '/templates'
+import TemplatePreview from '/components/TemplatePreview'
 import { useRef, useEffect, useState } from 'react'
 import { useKeys } from 'rooks'
 import { Base64 } from '/lib/utils';
-import TemplatePreview from '/app/TemplatePreview'
 
 export async function generateStaticParams() {
   return Object.keys(allTemplates).map(k => {
@@ -144,6 +144,7 @@ export default function Template({ params: { templateId } }) {
               </div>
             )}
           </form>
+          {/*
           <textarea
             ref={jsonRef}
             value={json || ''}
@@ -151,6 +152,7 @@ export default function Template({ params: { templateId } }) {
             onChange={(e) => setJson(e.target.value)}
             className={!valid ? s.error : undefined}
           />
+              */}
         </div>
         <button onClick={update}>Update (CMD + S)</button>
       </div>
