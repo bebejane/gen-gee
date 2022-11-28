@@ -13,7 +13,7 @@ export default async function RootLayout({ children }: LayoutProps) {
       <head>
         <title>Social-Gen</title>
       </head>
-      <body>
+      <body id="root">
         {children}
       </body>
     </html>
