@@ -14,6 +14,7 @@ const GradiText = ({
     gradientRows,
     fontSize
   },
+  values,
   config: {
     width,
     height
@@ -22,16 +23,15 @@ const GradiText = ({
 
   const rows = parseInt(gradientRows);
   const cols = parseInt(gradientCols);
-  const steps = cols * rows
+  const steps = 2
+
   const cmap = interpolate([gradientFrom, gradientTo]);
   const colors = new Array(steps).fill(0).map((el, idx) => cmap(idx / steps))
 
   return (
-    <div style={{
-      ...styles.container,
-    }}>
+    <div style={{ ...styles.container }}>
       <div style={{ ...styles.gradient, transform: `rotate(0deg) scale(1)` }}>
-        {colors.map((backgroundColor, i) =>
+        {colors?.map((backgroundColor, i) =>
           <div key={i} style={{ backgroundColor, flex: `0 0 ${(100 / cols)}%`, minHeight: `${100 / rows}%` }}></div>
         )}
       </div>
