@@ -2,6 +2,16 @@ import defaultConfig from './config.json'
 import defaultStyles from './styles.json'
 import interpolate from 'color-interpolate'
 
+const generateColors = (gradientFrom, gradientTo, steps) => {
+  try {
+    const cmap = interpolate([gradientFrom, gradientTo]);
+    return new Array(steps).fill(0).map((el, idx) => cmap(idx / steps))
+
+  } catch (err) {
+    return []
+  }
+
+}
 const GradiText = ({
   styles,
   values: {
@@ -13,20 +23,13 @@ const GradiText = ({
     gradientCols,
     gradientRows,
     fontSize
-  },
-  values,
-  config: {
-    width,
-    height
   }
 }) => {
 
   const rows = parseInt(gradientRows);
   const cols = parseInt(gradientCols);
-  const steps = 2
-
-  const cmap = interpolate([gradientFrom, gradientTo]);
-  const colors = new Array(steps).fill(0).map((el, idx) => cmap(idx / steps))
+  const steps = rows * cols
+  const colors = generateColors(gradientFrom, gradientTo, steps);
 
   return (
     <div style={{ ...styles.container }}>

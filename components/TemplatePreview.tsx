@@ -20,9 +20,9 @@ const errorHandler = (error: Error, info: { componentStack: string }) => {
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
-    <div role="alert">
+    <div className={s.error} role="alert">
       <p>Error:</p>
-      <pre>{error.message}</pre>
+      <pre>{error}</pre>
     </div>
   )
 }
@@ -37,8 +37,13 @@ export default function TemplatePreview({ name, values }) {
   const { config, styles } = Template
 
   useEffect(() => {
+
     const isPortrait = config.height > config.width
-    setScale(isPortrait ? (ref.current.clientHeight / config.height) : (ref.current.clientWidth / config.width))
+    const scaleHeight = (ref.current.clientHeight / config.height)
+    const scaleWidth = (ref.current.clientWidth / config.width)
+    const scale = isPortrait ? scaleHeight : scaleWidth
+    setScale(Math.min(scale, Math.min(scaleHeight, scaleWidth)))
+
   }, [ref, innerWidth, innerHeight, config])
 
   const containerStyles = {
@@ -47,14 +52,18 @@ export default function TemplatePreview({ name, values }) {
     maxHeight: `${config.height}px`,
     maxWidth: `${config.width}px`,
     transform: `scale(${scale})`,
+    left: `${(ref.current?.clientWidth - (config.width * scale)) / 2}px`,
+    top: `${(ref.current?.clientHeight - (config.height * scale)) / 2}px`,
   }
 
   Object.keys(Template.config.fields).forEach((k) => values[k] = values[k] !== undefined ? values[k] : Template.config.fields[k].value)
 
   return (
     <div className={s.wrap} ref={ref}>
-      <div className={s.container} ref={ref} style={containerStyles}>
-        <Template styles={styles} values={values} config={config} />
+      <div className={s.container} style={containerStyles}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Template styles={styles} values={values} config={config} />
+        </ErrorBoundary>
       </div>
     </div>
   );

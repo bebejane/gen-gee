@@ -23,7 +23,6 @@ export default function SocialGenModal({ ctx }: PropTypes) {
 
   const [template, setTemplate] = useState<any | undefined>();
   const [src, setSrc] = useState<string | undefined>();
-  const imageSrc = useDebounce<string | undefined>(src, 400)
   const [fields, setFields] = useState<Fields | undefined>();
   const [generating, setGenerating] = useState<boolean>(false);
   const dFields: Fields | undefined = useDebounce(fields, 400)
@@ -102,7 +101,6 @@ export default function SocialGenModal({ ctx }: PropTypes) {
   const values = {}
   fields && Object.keys(fields).forEach((k) => values[k] = fields[k].value)
 
-
   return (
     <Canvas ctx={ctx}>
       <div className={s.modal}>
@@ -165,7 +163,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
           </div>
         </div>
         <div className={s.buttons}>
-          <Button fullWidth={true} onClick={handleDownload} disabled={loading}>
+          <Button fullWidth={true} onClick={handleDownload}>
             {generating ? <>Preparing image....</> : <>Download</>}
           </Button>
           <Button
