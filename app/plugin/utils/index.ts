@@ -1,5 +1,6 @@
-export const isDev = document.location.hostname === 'localhost';
 export const isServer = typeof window === 'undefined'
+export const isDev = !isServer && document.location.hostname === 'localhost';
+
 //export const baseUrl = 'https://social-gen.up.railway.app'
 
 export const Base64 = {

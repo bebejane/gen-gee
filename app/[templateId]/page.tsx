@@ -83,6 +83,7 @@ export default function Template({ params: { templateId } }) {
   }, [json])
 
 
+  if (!template) return null
   const values = {}
   Object.keys(template.config.fields).forEach((k) => values[k] = fields[k].value || template.config.fields[k].value)
 
