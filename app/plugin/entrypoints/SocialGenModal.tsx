@@ -2,12 +2,11 @@ import s from './SocialGenModal.module.scss'
 import * as allTemplates from '/templates'
 import TemplatePreview from '/components/TemplatePreview'
 import { RenderModalCtx } from 'datocms-plugin-sdk';
-import { Canvas, Button, Form, TextField, SelectField } from 'datocms-react-ui';
+import { Canvas, Button, Form, TextField, SelectField, Spinner } from 'datocms-react-ui';
 import { generateSourceUrl } from '../utils';
 import { useState, useEffect } from 'react';
 import { useDebounce } from 'usehooks-ts';
 import format from 'date-fns/format';
-import Loader from "react-spinners/MoonLoader";
 
 export type PropTypes = {
   ctx: RenderModalCtx;
@@ -16,18 +15,16 @@ export type PropTypes = {
 export default function SocialGenModal({ ctx }: PropTypes) {
 
   const serverUrl = ctx.plugin.attributes.parameters.serverUrl as string
-  const parameters = ctx.parameters as ConfigParameters & { fields: Fields | undefined }
+  const parameters = ctx.parameters as ConfigParameters & { values: any | undefined }
   const { templateId } = parameters;
   const templateName = Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)
-  const savedFields = { ...parameters.fields || {} }
+  const savedValues = { ...parameters.values || {} }
 
   const [template, setTemplate] = useState<any | undefined>();
   const [src, setSrc] = useState<string | undefined>();
   const [fields, setFields] = useState<Fields | undefined>();
   const [generating, setGenerating] = useState<boolean>(false);
   const dFields: Fields | undefined = useDebounce(fields, 400)
-
-  const [loading, setLoading] = useState(true)
 
   const handleChange = (id: string, value: string) => {
     if (fields === undefined)
@@ -40,6 +37,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
 
     if (!upload)
       return
+
     if (!upload.attributes.mime_type?.includes('image'))
       return ctx.alert('File is not an image!')
 
@@ -48,7 +46,9 @@ export default function SocialGenModal({ ctx }: PropTypes) {
   }
 
   const handleDownload = async () => {
+
     setGenerating(true)
+
     const dateStr = format(new Date(), 'yyyy-MM-dd HH_mm')
     const filename = `${parameters.buttonLabel || 'Image'} (${dateStr}).png`
     const blob = await fetch(src as string).then(res => res.blob());
@@ -59,6 +59,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+
     setGenerating(false)
   }
 
@@ -68,7 +69,6 @@ export default function SocialGenModal({ ctx }: PropTypes) {
 
     const src = generateSourceUrl(serverUrl, template, { fields: dFields })
 
-    setLoading(true)
     setSrc(src)
 
   }, [dFields, template, serverUrl])
@@ -83,10 +83,10 @@ export default function SocialGenModal({ ctx }: PropTypes) {
         if (!template)
           return ctx.alert(`Template "${templateId}" not found!"`)
 
-        const mergedFields: Fields = {}
+        const mergedFields: Fields = template.config.fields;
 
-        Object.keys(template.config.fields).forEach((k) => {
-          mergedFields[k] = { ...template.config.fields[k], ...parameters.fields?.[k] }
+        Object.keys(parameters.values).forEach((k) => {
+          mergedFields[k].value = parameters.values[k] !== undefined ? parameters.values[k] : mergedFields[k].value
         })
 
         setTemplate(template)
@@ -164,12 +164,12 @@ export default function SocialGenModal({ ctx }: PropTypes) {
         </div>
         <div className={s.buttons}>
           <Button fullWidth={true} onClick={handleDownload}>
-            {generating ? <>Preparing image....</> : <>Download</>}
+            {generating ? <Spinner /> : <>Download</>}
           </Button>
           <Button
             fullWidth={true}
-            onClick={() => ctx.resolve(fields)}
-            disabled={!fields || JSON.stringify(savedFields) === JSON.stringify(fields)}
+            onClick={() => ctx.resolve(values)}
+            disabled={!values || JSON.stringify(savedValues) === JSON.stringify(values)}
           >
             Save
           </Button>

@@ -17,15 +17,15 @@ export default function SocialGen({ ctx }: PropTypes) {
       if (!templateId || !buttonLabel || !serverUrl)
         throw new Error('Plugin not configured correctly!');
 
-      const savedFields = ctx.item?.attributes[ctx.field.attributes.api_key] as string
-      const fields = savedFields ? JSON.parse(savedFields) : undefined
+      const savedValues = ctx.item?.attributes[ctx.field.attributes.api_key] as string
+      const values = savedValues ? JSON.parse(savedValues) : undefined
 
       const result = await ctx.openModal({
         id: 'socialGenModal',
         title: 'Social image',
         width: 'xl',
         closeDisabled: false,
-        parameters: { ...parameters, fields }
+        parameters: { ...parameters, values }
       });
 
       if (result)
