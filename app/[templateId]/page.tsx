@@ -54,6 +54,20 @@ export default function Template({ params: { templateId } }) {
       alert('Not valid JSON!')
     }
   }
+  const download = async () => {
+
+
+    const filename = `Image.png`
+    const blob = await fetch(src as string).then(res => res.blob());
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+  }
 
   useEffect(() => { update() }, [])
 
@@ -92,7 +106,6 @@ export default function Template({ params: { templateId } }) {
       <div className={s.image}>
         <TemplatePreview
           name={templateName}
-          styles={template.styles}
           values={values}
         />
       </div>
@@ -155,7 +168,7 @@ export default function Template({ params: { templateId } }) {
           />
               */}
         </div>
-        <button onClick={update}>Update (CMD + S)</button>
+        <button onClick={download}>Download</button>
       </div>
     </div>
   )

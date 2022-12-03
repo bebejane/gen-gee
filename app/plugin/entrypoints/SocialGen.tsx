@@ -18,7 +18,7 @@ export default function SocialGen({ ctx }: PropTypes) {
         throw new Error('Plugin not configured correctly!');
 
       const savedValues = ctx.item?.attributes[ctx.field.attributes.api_key] as string
-      const values = savedValues ? JSON.parse(savedValues) : undefined
+      const values = savedValues ? JSON.parse(savedValues) : {}
 
       const result = await ctx.openModal({
         id: 'socialGenModal',
