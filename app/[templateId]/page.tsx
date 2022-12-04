@@ -5,7 +5,7 @@ import * as allTemplates from '/templates'
 import TemplatePreview from '/components/TemplatePreview'
 import { useRef, useEffect, useState } from 'react'
 import { useKeys } from 'rooks'
-import { Base64 } from '/lib/utils';
+import { Base64, isValidFieldValue } from '/lib/utils';
 
 export async function generateStaticParams() {
   return Object.keys(allTemplates).map(k => {
@@ -21,11 +21,12 @@ export default function Template({ params: { templateId } }) {
   const [loading, setLoading] = useState(false)
   const [json, setJson] = useState<undefined | string>(JSON.stringify(template?.styles, null, 2))
   const [valid, setValid] = useState(true)
-  const [fields, setFields] = useState<undefined | any>(template?.config.fields)
+  const [fields, setFields] = useState<undefined | Fields>(template?.config.fields)
   const [src, setSrc] = useState<undefined | string>();
   const jsonRef = useRef<HTMLTextAreaElement | null>(null)
 
   const updateField = (id: string, value: string) => {
+    if (!isValidFieldValue(fields[id], value)) return
     setFields({ ...fields, [id]: { ...fields[id], value } });
   }
 
@@ -99,7 +100,7 @@ export default function Template({ params: { templateId } }) {
 
   if (!template) return null
   const values = {}
-  Object.keys(template.config.fields).forEach((k) => values[k] = fields[k].value || template.config.fields[k].value)
+  Object.keys(template.config.fields).forEach(id => values[id] = fields[id].value || template.config.fields[id].value)
 
   return (
     <div className={s.container}>
@@ -112,18 +113,18 @@ export default function Template({ params: { templateId } }) {
       <div className={s.template}>
         <div className={s.editor}>
           <form>
-            {fields && Object.keys(fields).map((k, idx) =>
+            {fields && Object.keys(fields).map((id, idx) =>
               <div key={idx}>
-                <label htmlFor={fields[k].id}>
-                  <span>{fields[k].label}</span>
-                  <span>{k}</span>
+                <label htmlFor={id}>
+                  <span>{fields[id].label}</span>
+                  <span>{id}</span>
                 </label>
                 {(() => {
-                  switch (fields[k].type) {
+                  switch (fields[id].type) {
                     case 'select':
                       return (
-                        <select value={fields[k].value} onChange={(e) => updateField(k, e.target.value)}>
-                          {fields[k].options?.map(({ value, label }, idx) =>
+                        <select value={fields[id].value} onChange={(e) => updateField(id, e.target.value)}>
+                          {fields[id].options?.map(({ value, label }, idx) =>
                             <option key={idx} value={value}>{label}</option>
                           )}
                         </select>
@@ -132,25 +133,45 @@ export default function Template({ params: { templateId } }) {
                       return (
                         <textarea
                           rows={5}
-                          onChange={(e) => updateField(k, e.target.value)} value={fields[k].value}
+                          onChange={(e) => updateField(id, e.target.value)} value={fields[id].value}
                         />
                       )
                     case 'image':
                       return (
                         <input
-                          type={"text"}
-                          id={fields[k].id}
-                          value={fields[k].value}
-                          onChange={(e) => updateField(k, e.target.value)}
+                          type="text"
+                          id={id}
+                          value={fields[id].value}
+                          onChange={(e) => updateField(id, e.target.value)}
+                        />
+                      )
+                    case 'number':
+                      return (
+                        <input
+                          type="number"
+                          id={id}
+                          value={fields[id].value}
+                          min={fields[id].min}
+                          max={fields[id].max}
+                          onChange={(e) => updateField(id, e.target.value)}
+                        />
+                      )
+                    case 'color':
+                      return (
+                        <input
+                          type="text"
+                          id={id}
+                          value={fields[id].value}
+                          onChange={(e) => updateField(id, e.target.value)}
                         />
                       )
                     default:
                       return (
                         <input
-                          type={"text"}
-                          id={fields[k].id}
-                          value={fields[k].value}
-                          onChange={(e) => updateField(k, e.target.value)}
+                          type="text"
+                          id={id}
+                          value={fields[id].value}
+                          onChange={(e) => updateField(id, e.target.value)}
                         />
                       )
                   }

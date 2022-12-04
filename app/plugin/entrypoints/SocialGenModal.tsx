@@ -7,6 +7,7 @@ import { generateSourceUrl } from '../utils';
 import { useState, useEffect } from 'react';
 import { useDebounce } from 'usehooks-ts';
 import format from 'date-fns/format';
+import { isValidFieldValue } from '/lib/utils';
 
 export type PropTypes = {
   ctx: RenderModalCtx;
@@ -27,7 +28,8 @@ export default function SocialGenModal({ ctx }: PropTypes) {
   const dFields: Fields | undefined = useDebounce(fields, 400)
 
   const handleChange = (id: string, value: string) => {
-    if (fields === undefined)
+    if (fields === undefined) return
+    if (!isValidFieldValue(fields[id], value))
       return
     setFields({ ...fields, [id]: { ...fields[id], value } })
   }
@@ -114,14 +116,6 @@ export default function SocialGenModal({ ctx }: PropTypes) {
                 const { type, label, value, options } = fields[id]
 
                 switch (type) {
-                  case 'text':
-                    return <TextField
-                      id={id}
-                      name={id}
-                      label={label}
-                      value={value}
-                      onChange={(value) => handleChange(id, value)}
-                    />
                   case 'textarea':
                     return (
                       <>
@@ -155,8 +149,29 @@ export default function SocialGenModal({ ctx }: PropTypes) {
                         }}
                       />
                     )
+                  case 'color':
+                    return (
+
+                      <TextField
+                        id={id}
+                        name={id}
+                        label={label}
+                        value={value}
+                        onChange={(value) => handleChange(id, value)}
+                      />
+                    )
                   default:
-                    return null;
+                    return (
+
+                      <TextField
+                        id={id}
+                        name={id}
+                        label={label}
+                        value={value}
+                        onChange={(value) => handleChange(id, value)}
+                      />
+
+                    )
                 }
               })}
             </Form>

@@ -11,23 +11,27 @@
 		},
 		"gradientFrom": {
 			"label": "Gradient from",
-			"type": "text",
+			"type": "color",
 			"value": "#F4FF00"
 		},
 		"gradientTo": {
 			"label": "Gradient to",
-			"type": "text",
+			"type": "color",
 			"value": "#FF0000"
 		},
 		"gradientCols": {
 			"label": "Columns",
-			"type": "text",
-			"value": "5"
+			"type": "number",
+			"value": "5",
+			"max": 30,
+			"min": 1
 		},
 		"gradientRows": {
 			"label": "Rows",
-			"type": "text",
-			"value": "4"
+			"type": "number",
+			"value": "4",
+			"max": 30,
+			"min": 1
 		},
 		"blockAlign": {
 			"label": "Block align",
