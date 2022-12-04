@@ -51,7 +51,7 @@
 		"color": {
 			"label": "Text color",
 			"type": "select",
-			"value": "#ffffff",
+			"value": "#000000",
 			"options": [
 				{
 					"label": "White",
