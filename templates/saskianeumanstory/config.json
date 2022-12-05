@@ -50,18 +50,8 @@
 		},
 		"color": {
 			"label": "Text color",
-			"type": "select",
-			"value": "#000000",
-			"options": [
-				{
-					"label": "White",
-					"value": "#ffffff"
-				},
-				{
-					"label": "Black",
-					"value": "#000000"
-				}
-			]
+			"type": "color",
+			"value": "#000000"
 		}
 	}
 }

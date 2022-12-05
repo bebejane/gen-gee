@@ -1,6 +1,7 @@
 import s from './SocialGenModal.module.scss'
 import * as allTemplates from '/templates'
 import TemplatePreview from '/components/TemplatePreview'
+import ColorPicker from '/components/ColorPicker';
 import { RenderModalCtx } from 'datocms-plugin-sdk';
 import { Canvas, Button, Form, TextField, SelectField, Spinner } from 'datocms-react-ui';
 import { generateSourceUrl } from '../utils';
@@ -151,14 +152,13 @@ export default function SocialGenModal({ ctx }: PropTypes) {
                     )
                   case 'color':
                     return (
-
-                      <TextField
-                        id={id}
-                        name={id}
-                        label={label}
-                        value={value}
-                        onChange={(value) => handleChange(id, value)}
-                      />
+                      <>
+                        <label htmlFor={id}>{label}</label>
+                        <ColorPicker
+                          color={value}
+                          onChange={(value) => handleChange(id, value)}
+                        />
+                      </>
                     )
                   default:
                     return (

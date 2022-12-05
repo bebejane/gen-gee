@@ -16,6 +16,7 @@ specifiers:
   js-base64: ^3.7.3
   next: 13.0.6
   react: 18.2.0
+  react-colorful: ^5.6.1
   react-dom: 18.2.0
   react-error-boundary: ^3.1.4
   react-spinners: ^0.13.6
@@ -41,6 +42,7 @@ dependencies:
   js-base64: 3.7.3
   next: 13.0.6_m5sxuueb27gk6ddc5gums6vtgq
   react: 18.2.0
+  react-colorful: 5.6.1_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 3.1.4_react@18.2.0
   react-spinners: 0.13.6_biqbaboplfbrettd7655fr4n2y
@@ -2118,6 +2120,16 @@ packages:
     resolution: {integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==}
     dependencies:
       performance-now: 2.1.0
+    dev: false
+
+  /react-colorful/5.6.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-dom/18.2.0_react@18.2.0:

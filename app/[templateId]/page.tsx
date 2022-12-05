@@ -3,6 +3,7 @@
 import s from './page.module.scss'
 import * as allTemplates from '/templates'
 import TemplatePreview from '/components/TemplatePreview'
+import ColorPicker from '/components/ColorPicker'
 import { Base64, isValidFieldValue } from '/lib/utils';
 import { useState } from 'react';
 
@@ -100,11 +101,9 @@ export default function Template({ params: { templateId } }) {
                       )
                     case 'color':
                       return (
-                        <input
-                          type="text"
-                          id={id}
-                          value={fields[id].value}
-                          onChange={(e) => updateField(id, e.target.value)}
+                        <ColorPicker
+                          color={fields[id].value}
+                          onChange={(value) => updateField(id, value)}
                         />
                       )
                     default:

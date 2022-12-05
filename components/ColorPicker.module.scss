@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .color {
+    min-height: 1.3rem;
+    min-width: 1.3rem;
+    cursor: pointer;
+    border: 1px solid lightgrey;
+  }
+
+  .label {
+    margin-left: 0.5rem;
+  }
+}
+
+.picker {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
