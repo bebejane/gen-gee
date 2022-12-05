@@ -49,18 +49,20 @@ export default function SocialGenModal({ ctx }: PropTypes) {
 
     const format = upload?.attributes.url.split('.').pop()
     handleChange(id, `${upload?.attributes.url}?fm=${format}`)
+    setTimeout(handleImageLoading, 200)
 
+  }
+
+  const handleImageLoading = () => {
     const images = ref.current?.querySelectorAll('img');
     let loaded = Array.from(images).filter(el => el.complete).length;
-    if (loaded >= images.length)
-      return
+    if (loaded >= images.length) return
 
     setLoading(true)
     images.forEach(el => {
-      el.addEventListener('load', () => ++loaded === images.length && setLoading(false))
+      el.addEventListener('load', () => (++loaded === images.length) && setLoading(false))
     })
   }
-
 
   const handleDownload = async () => {
 
