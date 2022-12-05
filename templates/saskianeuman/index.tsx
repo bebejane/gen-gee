@@ -28,7 +28,7 @@ const SaskiaNeuman = ({
         <div style={{ ...styles.flex }}>
           {artist}
         </div>
-        <div style={{ ...styles.flex }}>
+        <div style={{ ...styles.flex, ...styles.italic }}>
           {titleSwedish}
         </div>
         <div style={{ ...styles.flex, ...styles.italic }}>
