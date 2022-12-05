@@ -5,10 +5,11 @@ import ColorPicker from '/components/ColorPicker';
 import { RenderModalCtx } from 'datocms-plugin-sdk';
 import { Canvas, Button, Form, TextField, SelectField, Spinner } from 'datocms-react-ui';
 import { generateSourceUrl } from '../utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDebounce } from 'usehooks-ts';
-import format from 'date-fns/format';
 import { isValidFieldValue } from '/lib/utils';
+import { MoonLoader } from 'react-spinners'
+import format from 'date-fns/format';
 
 export type PropTypes = {
   ctx: RenderModalCtx;
@@ -22,10 +23,12 @@ export default function SocialGenModal({ ctx }: PropTypes) {
   const templateName = Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)
   const savedValues = { ...parameters.values || {} }
 
+  const ref = useRef<HTMLDivElement | undefined>()
   const [template, setTemplate] = useState<any | undefined>();
   const [src, setSrc] = useState<string | undefined>();
   const [fields, setFields] = useState<Fields | undefined>();
   const [generating, setGenerating] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const dFields: Fields | undefined = useDebounce(fields, 400)
 
   const handleChange = (id: string, value: string) => {
@@ -46,7 +49,18 @@ export default function SocialGenModal({ ctx }: PropTypes) {
 
     const format = upload?.attributes.url.split('.').pop()
     handleChange(id, `${upload?.attributes.url}?fm=${format}`)
+
+    const images = ref.current?.querySelectorAll('img');
+    let loaded = Array.from(images).filter(el => el.complete).length;
+    if (loaded >= images.length)
+      return
+
+    setLoading(true)
+    images.forEach(el => {
+      el.addEventListener('load', () => ++loaded === images.length && setLoading(false))
+    })
   }
+
 
   const handleDownload = async () => {
 
@@ -106,10 +120,11 @@ export default function SocialGenModal({ ctx }: PropTypes) {
 
   return (
     <Canvas ctx={ctx}>
-      <div className={s.modal}>
+      <div className={s.modal} ref={ref}>
         <div className={s.editor}>
           <figure>
             <TemplatePreview name={templateName} values={values} />
+            {loading && <div className={s.loading}><MoonLoader /></div>}
           </figure>
           <div className={s.fields}>
             <Form>
