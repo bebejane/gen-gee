@@ -203,7 +203,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
             onClick={() => ctx.resolve(values)}
             disabled={!values || JSON.stringify(savedValues) === JSON.stringify(values)}
           >
-            Save
+            Done
           </Button>
         </div>
       </div>
