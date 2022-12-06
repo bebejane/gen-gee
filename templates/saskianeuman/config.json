@@ -46,10 +46,6 @@
 				{
 					"label": "Contain",
 					"value": "contain"
-				},
-				{
-					"label": "Fill",
-					"value": "fill"
 				}
 			]
 		},

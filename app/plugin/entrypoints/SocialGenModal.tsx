@@ -67,7 +67,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
   const handleDownload = async () => {
 
     setGenerating(true)
-
+    console.log('download', src)
     const dateStr = format(new Date(), 'yyyy-MM-dd HH_mm')
     const filename = `${parameters.buttonLabel || 'Image'} (${dateStr}).png`
     const blob = await fetch(src as string).then(res => res.blob());
@@ -77,8 +77,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
     a.download = filename
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
-
+    setTimeout(() => document.body.removeChild(a), 100)
     setGenerating(false)
   }
 
