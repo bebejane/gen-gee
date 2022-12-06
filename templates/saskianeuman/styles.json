@@ -39,7 +39,7 @@
 	},
 	"italic": {
 		"fontFamily": "ProtokollBold-Italic",
-		"font=style": "italic"
+		"fontStyle": "italic"
 	},
 	"flex": {
 		"display": "flex"
