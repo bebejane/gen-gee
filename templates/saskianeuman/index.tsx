@@ -11,7 +11,6 @@ const SaskiaNeuman = ({
     titleSwedish,
     startDate,
     endDate,
-    alignText,
     objectFit
   } }) => {
 
@@ -20,11 +19,7 @@ const SaskiaNeuman = ({
       {backgroundImage &&
         <img src={backgroundImage} style={{ ...styles.image, objectFit }} />
       }
-      <div style={{
-        ...styles.text,
-        color,
-        alignItems: alignText
-      }}>
+      <div style={{ ...styles.text, color }}>
         <div style={{ ...styles.flex }}>
           {artist}
         </div>
