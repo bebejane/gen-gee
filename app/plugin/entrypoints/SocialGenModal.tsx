@@ -77,7 +77,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
     a.download = filename
     document.body.appendChild(a);
     a.click();
-    setTimeout(() => document.body.removeChild(a), 100)
+    document.body.removeChild(a)
     setGenerating(false)
   }
 
@@ -127,71 +127,70 @@ export default function SocialGenModal({ ctx }: PropTypes) {
             <TemplatePreview name={templateName} values={values} />
             {loading && <div className={s.loading}><MoonLoader /></div>}
           </figure>
-          <div className={s.fields}>
-            <Form>
-              {fields && Object.keys(fields).map(id => {
-                const { type, label, value, options } = fields[id]
 
-                switch (type) {
-                  case 'textarea':
-                    return (
-                      <>
-                        <label htmlFor={id}>{label}</label>
-                        <textarea
-                          id={id}
-                          name={id}
-                          value={value}
-                          rows={5}
-                          onChange={({ target: { value } }) => handleChange(id, value)}
-                        />
-                      </>
-                    )
-                  case 'image':
-                    return (
-                      <div className={s.imageSelector}>
-                        <div>{value && <img alt="thumb" src={`${value}?w=50`} />}</div>
-                        <Button onClick={() => handleSelectImage(id)}>Select image...</Button>
-                      </div>
-                    )
-                  case 'select':
-                    return (
-                      <SelectField
+          <Form className={s.form}>
+            {fields && Object.keys(fields).map(id => {
+              const { type, label, value, options } = fields[id]
+
+              switch (type) {
+                case 'textarea':
+                  return (
+                    <>
+                      <label htmlFor={id}>{label}</label>
+                      <textarea
                         id={id}
                         name={id}
-                        label={label}
-                        value={options?.find(o => o.value === fields[id].value)}
-                        selectInputProps={{ isMulti: false, options }}
-                        onChange={(newValue: any) => {
-                          handleChange(id, newValue?.value as string)
-                        }}
-                      />
-                    )
-                  case 'color':
-                    return (
-                      <>
-                        <label htmlFor={id}>{label}</label>
-                        <ColorPicker
-                          color={value}
-                          onChange={(value) => handleChange(id, value)}
-                        />
-                      </>
-                    )
-                  default:
-                    return (
-
-                      <TextField
-                        id={id}
-                        name={id}
-                        label={label}
                         value={value}
+                        rows={5}
+                        onChange={({ target: { value } }) => handleChange(id, value)}
+                      />
+                    </>
+                  )
+                case 'image':
+                  return (
+                    <div className={s.imageSelector}>
+                      <div>{value && <img alt="thumb" src={`${value}?w=50`} />}</div>
+                      <Button onClick={() => handleSelectImage(id)}>Select image...</Button>
+                    </div>
+                  )
+                case 'select':
+                  return (
+                    <SelectField
+                      id={id}
+                      name={id}
+                      label={label}
+                      value={options?.find(o => o.value === fields[id].value)}
+                      selectInputProps={{ isMulti: false, options }}
+                      onChange={(newValue: any) => {
+                        handleChange(id, newValue?.value as string)
+                      }}
+                    />
+                  )
+                case 'color':
+                  return (
+                    <>
+                      <label htmlFor={id}>{label}</label>
+                      <ColorPicker
+                        color={value}
                         onChange={(value) => handleChange(id, value)}
                       />
+                    </>
+                  )
+                default:
+                  return (
 
-                    )
-                }
-              })}
-            </Form>
-          </div>
+                    <TextField
+                      id={id}
+                      name={id}
+                      label={label}
+                      value={value}
+                      onChange={(value) => handleChange(id, value)}
+                    />
+
+                  )
+              }
+            })}
+          </Form>
         </div>
         <div className={s.buttons}>
           <Button fullWidth={true} onClick={handleDownload}>
