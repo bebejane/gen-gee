@@ -21,6 +21,7 @@ export default function Template({ params: { templateId } }) {
 
   const updateField = (id: string, value: string) => {
     if (!isValidFieldValue(fields[id], value)) return console.log('not valid')
+
     setFields({ ...fields, [id]: { ...fields[id], value } });
   }
 
@@ -104,6 +105,17 @@ export default function Template({ params: { templateId } }) {
                         <ColorPicker
                           color={fields[id].value}
                           onChange={(value) => updateField(id, value)}
+                        />
+                      )
+                    case 'range':
+                      return (
+                        <input
+                          type="range"
+                          id={id}
+                          value={fields[id].value}
+                          min={fields[id].min}
+                          max={fields[id].max}
+                          onChange={(e) => updateField(id, e.target.value)}
                         />
                       )
                     default:
