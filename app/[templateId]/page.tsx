@@ -19,11 +19,10 @@ export async function generateStaticParams() {
 export default function Template({ params: { templateId } }) {
 
   const searchParams = useSearchParams();
-
   const templateName = Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)
   const template = allTemplates[templateName]
-  const shareFields = searchParams.get('f') ? Base64.decode(searchParams.get('f')) : undefined
-  const [fields, setFields] = useState<undefined | Fields>(shareFields || template?.config.fields)
+  const defaultFields = searchParams.get('f') ? Base64.decode(searchParams.get('f')) : template?.config.fields
+  const [fields, setFields] = useState<undefined | Fields>(defaultFields)
 
   const updateField = (id: string, value: string) => {
     if (!isValidFieldValue(fields[id], value)) return console.log('not valid')
@@ -49,7 +48,7 @@ export default function Template({ params: { templateId } }) {
   const share = () => {
     const url = `https://social-gen.vercel.app/${template.config.id}?f=${Base64.encode(fields)}`
     navigator.clipboard.writeText(url);
-    alert('Copied url to clipboard!')
+    console.log(url);
   }
 
   if (!template)
@@ -146,7 +145,7 @@ export default function Template({ params: { templateId } }) {
           </form>
         </div>
         <button onClick={download}>Download</button>
-        <button onClick={share}>Share</button>
+        <button onClick={share}>Copy url</button>
       </div>
     </div>
   )

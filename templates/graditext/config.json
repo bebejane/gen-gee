@@ -7,7 +7,7 @@
 		"image": {
 			"label": "Image",
 			"type": "image",
-			"value": "http://localhost:3000/images/image1.jpg"
+			"value": "https://social-gen.vercel.app/images/image1.jpg"
 		},
 		"matrix": {
 			"type": "range",
