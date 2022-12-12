@@ -13,6 +13,7 @@ specifiers:
   dotenv: ^16.0.3
   eslint: 8.27.0
   eslint-config-next: 13.0.3
+  hex-color-to-color-name: ^1.0.2
   js-base64: ^3.7.3
   next: 13.0.6
   react: 18.2.0
@@ -39,6 +40,7 @@ dependencies:
   dotenv: 16.0.3
   eslint: 8.27.0
   eslint-config-next: 13.0.3_rmayb2veg2btbq6mbmnyivgasy
+  hex-color-to-color-name: 1.0.2
   js-base64: 3.7.3
   next: 13.0.6_m5sxuueb27gk6ddc5gums6vtgq
   react: 18.2.0
@@ -1557,6 +1559,10 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+    dev: false
+
+  /hex-color-to-color-name/1.0.2:
+    resolution: {integrity: sha512-YKPBFTSbYIHH8YKcJB4Q5PV+Tr+kvDXpV60BcPMUu5CSZUcc/qOOx7lkr7luk6MSXKd5A82yfPGZTgedIdQ+aA==}
     dev: false
 
   /hoist-non-react-statics/3.3.2:

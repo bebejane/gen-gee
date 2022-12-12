@@ -1,9 +1,10 @@
-
 import s from './ColorPicker.module.scss'
 import { useRef, useEffect, useState } from 'react';
 import { useWindowSize, useOutsideClick } from 'rooks';
 import { HexColorPicker } from "react-colorful";
 import ReactDOM from 'react-dom';
+import { GetColorName } from 'hex-color-to-color-name';
+
 
 export type Props = {
   color: string
@@ -39,7 +40,7 @@ export default function ColorPicker({ color: colorFromProps, onChange }) {
   return (
     <div className={s.container} >
       <div className={s.color} onClick={() => setShow(!show)} style={{ backgroundColor: color }}></div>
-      <div className={s.label} ref={ref} >{color}</div>
+      <div className={s.label} ref={ref} >{GetColorName(color)}</div>
       {ReactDOM.createPortal(
         <div
           className={s.picker}

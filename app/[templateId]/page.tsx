@@ -7,6 +7,9 @@ import ColorPicker from '/components/ColorPicker'
 import { Base64, isValidFieldValue } from '/lib/utils';
 import { useState } from 'react';
 
+import { useSearchParams } from 'next/navigation';
+
+
 export async function generateStaticParams() {
   return Object.keys(allTemplates).map(k => {
     return { templateId: allTemplates[k].config.id }
@@ -15,9 +18,12 @@ export async function generateStaticParams() {
 
 export default function Template({ params: { templateId } }) {
 
+  const searchParams = useSearchParams();
+
   const templateName = Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)
   const template = allTemplates[templateName]
-  const [fields, setFields] = useState<undefined | Fields>(template?.config.fields)
+  const shareFields = searchParams.get('f') ? Base64.decode(searchParams.get('f')) : undefined
+  const [fields, setFields] = useState<undefined | Fields>(shareFields || template?.config.fields)
 
   const updateField = (id: string, value: string) => {
     if (!isValidFieldValue(fields[id], value)) return console.log('not valid')
@@ -38,6 +44,12 @@ export default function Template({ params: { templateId } }) {
     a.click();
     document.body.removeChild(a);
 
+  }
+
+  const share = () => {
+    const url = `https://social-gen.vercel.app/${template.config.id}?f=${Base64.encode(fields)}`
+    navigator.clipboard.writeText(url);
+    alert('Copied url to clipboard!')
   }
 
   if (!template)
@@ -61,7 +73,7 @@ export default function Template({ params: { templateId } }) {
               <div key={idx}>
                 <label htmlFor={id}>
                   <span>{fields[id].label}</span>
-                  <span>{id}</span>
+
                 </label>
                 {(() => {
                   switch (fields[id].type) {
@@ -134,6 +146,7 @@ export default function Template({ params: { templateId } }) {
           </form>
         </div>
         <button onClick={download}>Download</button>
+        <button onClick={share}>Share</button>
       </div>
     </div>
   )
