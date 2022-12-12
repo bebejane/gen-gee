@@ -16,11 +16,11 @@ const generateBackground = (image, matrix) => {
 
   return {
     background: `url(${image})`,
-    backgroundSize: `${100 - (matrix)}% ${100 - (matrix)}%`,
+    backgroundSize: `${100 - (matrix)}% ${101 - (matrix)}%`,
     transform: `rotate(${Math.random() * matrix}deg)`,
-    filter: `grayscale(${(Math.random() * matrix) / 100})`,
+    filter: `saturate(${((matrix / 100) * 6) + 1}) `,
     transition: 'transform 0.3s ease',
-    opacity: (matrix / 100)
+    opacity: 1//(matrix / 100)
   }
 
 }
@@ -46,19 +46,17 @@ const GradiText = ({
   const steps = rows * cols
   const colors = generateColors(gradientFrom, gradientTo, steps);
 
-
   return (
     <div style={{ ...styles.container }}>
       <div style={{ ...styles.gradient, transform: `rotate(0deg) scale(1)` }}>
         {colors?.map((backgroundColor, i) =>
-          <div key={i} style={{ backgroundColor, flex: `0 0 ${(100 / cols)}%`, minHeight: `${100 / rows}%` }}></div>
+          <div key={i} style={{ backgroundColor, flex: `0 0 ${(100 / cols)}% `, minHeight: `${100 / rows}% ` }}></div>
         )}
       </div>
       <div
         style={{
           ...styles.image,
           ...generateBackground(image, matrix),
-          //opacity: 0.
         }}
       ></div>
       <div style={{
@@ -67,7 +65,7 @@ const GradiText = ({
         textAlign,
         fontSize: fontSize
       }}>
-        {text}<br />---<br />{text.split(' ').reverse().join(' ')}
+        {text} {text.split(' ').reverse().join(' ')}
       </div>
 
     </div >

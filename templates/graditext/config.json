@@ -21,29 +21,24 @@
 			"type": "textarea",
 			"value": "Text..."
 		},
-		"gradientFrom": {
-			"label": "Gradient from",
-			"type": "color",
-			"value": "#F4FF00"
-		},
-		"gradientTo": {
-			"label": "Gradient to",
-			"type": "color",
-			"value": "#FF0000"
-		},
-		"gradientCols": {
-			"label": "Columns",
-			"type": "number",
-			"value": "5",
-			"max": 30,
-			"min": 1
-		},
-		"gradientRows": {
-			"label": "Rows",
-			"type": "number",
-			"value": "4",
-			"max": 30,
-			"min": 1
+		"textAlign": {
+			"label": "Text align",
+			"type": "select",
+			"value": "left",
+			"options": [
+				{
+					"label": "Left",
+					"value": "left"
+				},
+				{
+					"label": "Center",
+					"value": "center"
+				},
+				{
+					"label": "Right",
+					"value": "right"
+				}
+			]
 		},
 		"blockAlign": {
 			"label": "Block align",
@@ -64,25 +59,31 @@
 				}
 			]
 		},
-		"textAlign": {
-			"label": "Text align",
-			"type": "select",
-			"value": "left",
-			"options": [
-				{
-					"label": "Left",
-					"value": "left"
-				},
-				{
-					"label": "Center",
-					"value": "center"
-				},
-				{
-					"label": "Right",
-					"value": "right"
-				}
-			]
+		"gradientFrom": {
+			"label": "From",
+			"type": "color",
+			"value": "#F4FF00"
 		},
+		"gradientTo": {
+			"label": "To",
+			"type": "color",
+			"value": "#FF0000"
+		},
+		"gradientCols": {
+			"label": "Columns",
+			"type": "number",
+			"value": "5",
+			"max": 30,
+			"min": 1
+		},
+		"gradientRows": {
+			"label": "Rows",
+			"type": "number",
+			"value": "4",
+			"max": 30,
+			"min": 1
+		},
+
 		"fontSize": {
 			"label": "Font size",
 			"type": "select",
