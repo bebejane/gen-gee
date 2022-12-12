@@ -5,7 +5,6 @@ import { HexColorPicker } from "react-colorful";
 import ReactDOM from 'react-dom';
 import { GetColorName } from 'hex-color-to-color-name';
 
-
 export type Props = {
   color: string
   onChange: (color: string) => void
@@ -23,7 +22,7 @@ export default function ColorPicker({ color: colorFromProps, onChange }) {
   useOutsideClick(refPicker, () => setShow(false));
 
   useEffect(() => {
-    if (ref.current === null || refPicker.current === null)
+    if (ref.current === null || refPicker.current === null || refPicker.current === undefined)
       return
 
     const left = ref.current.getBoundingClientRect().left
@@ -37,11 +36,13 @@ export default function ColorPicker({ color: colorFromProps, onChange }) {
       onChange(color)
   }, [color, colorFromProps, onChange])
 
+
+
   return (
     <div className={s.container} >
       <div className={s.color} onClick={() => setShow(!show)} style={{ backgroundColor: color }}></div>
       <div className={s.label} ref={ref} >{GetColorName(color)}</div>
-      {ReactDOM.createPortal(
+      {show && ReactDOM.createPortal(
         <div
           className={s.picker}
           style={{ ...pickerStyle, display: show ? 'block' : 'none' }}
@@ -49,7 +50,7 @@ export default function ColorPicker({ color: colorFromProps, onChange }) {
         >
           <HexColorPicker onChange={(newColor) => setColor(newColor)} />
         </div>
-        , document.body)}
+        , document?.body)}
     </div>
   );
 }
