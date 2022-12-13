@@ -19,7 +19,7 @@
 		"text": {
 			"label": "Text",
 			"type": "textarea",
-			"value": "Text..."
+			"value": ""
 		},
 		"textAlign": {
 			"label": "Text align",
@@ -46,7 +46,7 @@
 			"value": "flex-start",
 			"options": [
 				{
-					"label": "Left",
+					"label": "Top",
 					"value": "flex-start"
 				},
 				{
@@ -54,7 +54,7 @@
 					"value": "center"
 				},
 				{
-					"label": "Right",
+					"label": "Bottom",
 					"value": "flex-end"
 				}
 			]
