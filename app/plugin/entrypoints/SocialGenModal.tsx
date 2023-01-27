@@ -70,7 +70,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
     console.log('download', src)
     const dateStr = format(new Date(), 'yyyy-MM-dd HH_mm')
     const filename = `${parameters.buttonLabel || 'Image'} (${dateStr}).png`
-    const blob = await fetch(src as string).then(res => res.blob());
+    const blob = await fetch(src as string, { cache: "no-store" }).then(res => res.blob());
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;

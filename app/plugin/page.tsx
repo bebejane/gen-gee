@@ -22,8 +22,6 @@ import SocialGenModal from './entrypoints/SocialGenModal'
 export default function Plugin() {
 
   useEffect(() => {
-    console.log(connect);
-
     connect({
       renderConfigScreen(ctx) {
         return render(<ConfigScreen ctx={ctx} />);
@@ -61,8 +59,6 @@ export default function Plugin() {
       },
     });
   }, [])
-  console.log('render plugin');
-
 
   return (
     <div id="root" className={s.container}>
