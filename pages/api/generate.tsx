@@ -8,9 +8,12 @@ import { Base64 } from '/lib/utils';
 export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
 
   try {
+    console.log('generate api handler');
 
     const { searchParams } = req.nextUrl
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
+    console.log('loaded fonts', fonts);
+
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
     const { config } = Component
 
