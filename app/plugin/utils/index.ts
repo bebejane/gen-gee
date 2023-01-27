@@ -10,5 +10,5 @@ export const Base64 = {
 
 export const generateSourceUrl = (baseUrl: string, template: any, { fields }: { fields: Fields }) => {
   const { config } = template;
-  return `${baseUrl}/api/generate?t=${config.id}&f=${Base64.encode(fields)}`
+  return `${baseUrl}/api/generate?t=${config.id}&cache=${Math.random()}&f=${Base64.encode(fields)}`
 }
