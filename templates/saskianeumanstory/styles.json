@@ -10,7 +10,7 @@
 		"textAlign": "right",
 		"alignItems": "flex-start",
 		"justifyContent": "center",
-		"backgroundColor": "#00000"
+		"backgroundColor": "#ffffff"
 	},
 	"image": {
 		"position": "absolute",
