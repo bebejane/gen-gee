@@ -56,7 +56,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
 
     //console.log(fonts[0].data.byteLength)
 
-    return image.
+    return image
 
   } catch (err) {
     console.log('error')
