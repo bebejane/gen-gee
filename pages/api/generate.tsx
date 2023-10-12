@@ -57,7 +57,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
       debug: true
     })
     console.log(image)
-    //return mock
+    return mock
     return image
 
   } catch (err) {
