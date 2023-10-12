@@ -39,7 +39,8 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     return res;
 
   } catch (err) {
-    console.error(err)
+    console.log('error')
+    console.log(err)
     return errorResponse(err)
   }
 }
