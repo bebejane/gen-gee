@@ -49,14 +49,14 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     //console.log(props);
     //return mock
     const image = new ImageResponse(<Component {...props} />, {
-      width,
-      height,
+      //width,
+      //height,
       fonts
     })
 
     //console.log(fonts[0].data.byteLength)
 
-    return image
+    return image.
 
   } catch (err) {
     console.log('error')
