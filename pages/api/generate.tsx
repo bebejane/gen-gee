@@ -47,10 +47,11 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const image = new ImageResponse(<Component {...props} />, {
       width,
       height,
-      fonts
+      fonts,
+      debug: true
     })
     console.log(image)
-    return mock
+    //return mock
     return image
 
   } catch (err) {
