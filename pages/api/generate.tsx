@@ -9,7 +9,7 @@ import { Base64 } from '/lib/utils';
 export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
   console.log('generate api handler');
   return new Response(
-    JSON.stringify({ ok: true }),
+    JSON.stringify({ ok: searchParams.get('f') }),
     {
       status: 200,
       headers: {
