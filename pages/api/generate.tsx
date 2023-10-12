@@ -40,7 +40,6 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
 
-    //Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
     const values = Object.keys(fields).reduce((obj, k) => obj = { ...obj, [k]: fields[k].value }, {})
@@ -55,7 +54,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
       fonts
     })
 
-    console.log(fonts)
+    console.log(fonts[0].data.byteLength)
     return mock
     return image
 
@@ -73,7 +72,7 @@ export type FontOption = {
   style?: 'normal' | 'italic'
 }
 
-const generateFont = async (opt: Omit<FontOption, 'data'>): Promise<FontOption> => {
+const generateFont = async (opt: any): Promise<FontOption> => {
   return {
     data: await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/fonts/${opt.name}.woff`).then(res => res.arrayBuffer()),
     ...opt
