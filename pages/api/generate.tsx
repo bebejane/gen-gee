@@ -1,6 +1,6 @@
 
-import { NextRequest, NextResponse } from 'next/server';
-import { ImageResponse } from '@vercel/og';
+import { NextRequest, NextResponse, ImageResponse } from 'next/server';
+
 import * as templates from '/templates'
 import fontFiles from '/fonts.json'
 import { Base64 } from '/lib/utils';
