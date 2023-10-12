@@ -23,15 +23,21 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
   try {
 
 
-    const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
+    const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name })))
     console.log('loaded fonts', fonts);
 
 
-    const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
+    const idx = Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))
+
+    if (idx === undefined) throw new Error('Template not found')
+
+    const Component = templates[idx]
     const { config } = Component
 
-    const styles = searchParams.get('s') ? Base64.decode(searchParams.get('s')) : Component.styles
-    const fields = searchParams.get('f') ? Base64.decode(searchParams.get('f')) : {}
+    const s = searchParams.get('s')
+    const f = searchParams.get('f')
+    const styles = s ? Base64.decode(s) : Component.styles
+    const fields = f ? Base64.decode(f) : {}
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
 
