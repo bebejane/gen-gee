@@ -41,10 +41,9 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const values = Object.keys(fields).reduce((obj, k) => obj = { ...obj, [k]: fields[k].value }, {})
     const props = { styles, values, config: Component.config }
 
-    console.log(Component)
     console.log(`generate image ${width}x${height}`);
     console.log(props);
-    return mock
+    //return mock
     return new ImageResponse(<Component {...props} />, {
       width,
       height,
