@@ -5,7 +5,6 @@ import * as templates from '/templates'
 import fontFiles from '/fonts.json'
 import { Base64 } from '/lib/utils';
 
-
 export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
   console.log('generate api handler');
   const { searchParams } = req.nextUrl
@@ -53,13 +52,11 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const image = new ImageResponse(<Component {...props} />, {
       width,
       height,
-      fonts,
-      debug: true,
-      status: 200,
+      fonts
     })
 
-    console.log(image)
-    //return mock
+    console.log(fonts)
+    return mock
     return image
 
   } catch (err) {
