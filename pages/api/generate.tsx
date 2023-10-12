@@ -6,25 +6,12 @@ import fontFiles from '/fonts.json'
 import { Base64 } from '/lib/utils';
 
 export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
-  console.log('generate api handler');
   const { searchParams } = req.nextUrl
-
-  const mock = new Response(
-    JSON.stringify({ f: searchParams.get('f'), s: searchParams.get('s'), t: searchParams.get('t') }),
-    {
-      status: 200,
-      headers: {
-        'content-type': 'application/json',
-      },
-    }
-  )
 
   try {
 
-
     const fonts = await Promise.all(fontFiles.map(({ name, weight, style }) => generateFont({ name, weight, style })))
     console.log('loaded fonts', fonts);
-
 
     const idx = Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))
 
@@ -46,15 +33,12 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const props = { styles, values, config: Component.config }
 
     console.log(`generate image ${width}x${height}`);
-    //console.log(props);
-    //return mock
+
     const image = new ImageResponse(<Component {...props} />, {
-      //width,
-      //height,
+      width,
+      height,
       fonts
     })
-
-    //console.log(fonts[0].data.byteLength)
 
     return image
 
