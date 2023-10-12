@@ -23,7 +23,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
   try {
 
 
-    const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name })))
+    const fonts = await Promise.all(fontFiles.map(({ name, weight, style }) => generateFont({ name, weight, style })))
     console.log('loaded fonts', fonts);
 
 
@@ -54,10 +54,12 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
       width,
       height,
       fonts,
-      debug: true
+      debug: true,
+      status: 200,
     })
+
     console.log(image)
-    return mock
+    //return mock
     return image
 
   } catch (err) {
