@@ -5,8 +5,18 @@ import * as templates from '/templates'
 import fontFiles from '/fonts.json'
 import { Base64 } from '/lib/utils';
 
+
 export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
   console.log('generate api handler');
+  return new Response(
+    JSON.stringify({ ok: true }),
+    {
+      status: 200,
+      headers: {
+        'content-type': 'application/json',
+      },
+    }
+  )
 
   try {
 
