@@ -26,7 +26,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
     console.log('loaded fonts', fonts);
 
-    return mock
+
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
     const { config } = Component
 
@@ -34,6 +34,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const fields = searchParams.get('f') ? Base64.decode(searchParams.get('f')) : {}
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
+    return mock
     //Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
