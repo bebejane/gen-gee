@@ -43,6 +43,7 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
 
     console.log(Component)
     console.log(`generate image ${width}x${height}`);
+    console.log(props);
     return mock
     return new ImageResponse(<Component {...props} />, {
       width,
