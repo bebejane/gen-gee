@@ -42,13 +42,16 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const props = { styles, values, config: Component.config }
 
     console.log(`generate image ${width}x${height}`);
-    console.log(props);
+    //console.log(props);
     //return mock
-    return new ImageResponse(<Component {...props} />, {
+    const image = new ImageResponse(<Component {...props} />, {
       width,
       height,
       fonts
     })
+    console.log(image)
+    return mock
+    return image
 
   } catch (err) {
     console.log('error')
@@ -94,6 +97,6 @@ export const config = {
     bodyParser: {
       sizeLimit: '10mb',
     },
-    responseLimit: false,
+    responseLimit: '20mb',
   },
 };
