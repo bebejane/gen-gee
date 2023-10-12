@@ -34,15 +34,16 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const fields = searchParams.get('f') ? Base64.decode(searchParams.get('f')) : {}
     const width = parseInt(searchParams.get('w') || config.width)
     const height = parseInt(searchParams.get('h') || config.height)
-    return mock
+
     //Object.keys(Component.styles).forEach((k) => styles[k] = { ...Component.styles[k], ...styles[k] })
     Object.keys(Component.config.fields).forEach((k) => fields[k] = { ...Component.config.fields[k], ...fields[k] })
 
     const values = Object.keys(fields).reduce((obj, k) => obj = { ...obj, [k]: fields[k].value }, {})
     const props = { styles, values, config: Component.config }
 
+    console.log(Component)
     console.log(`generate image ${width}x${height}`);
-
+    return mock
     return new ImageResponse(<Component {...props} />, {
       width,
       height,
