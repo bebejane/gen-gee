@@ -33,7 +33,7 @@
 		"left": "0",
 		"color": "#ffffff",
 		"fontFamily": "ProtokollBold",
-		"fontSize": "100px"
+		"fontSize": "100"
 	},
 	"italic": {
 		"fontFamily": "ProtokollBold-Italic",
