@@ -23,7 +23,7 @@ export default function SocialGenModal({ ctx }: PropTypes) {
   const templateName = Object.keys(allTemplates).find((k) => allTemplates[k].config.id === templateId)
   const savedValues = { ...parameters.values || {} }
 
-  const ref = useRef<HTMLDivElement | undefined>()
+  const ref = useRef<HTMLDivElement | null>(null)
   const [template, setTemplate] = useState<any | undefined>();
   const [src, setSrc] = useState<string | undefined>();
   const [fields, setFields] = useState<Fields | undefined>();
@@ -48,31 +48,30 @@ export default function SocialGenModal({ ctx }: PropTypes) {
       return ctx.alert('File is not an image!')
 
     const format = upload?.attributes.url.split('.').pop()
-    handleChange(id, `${upload?.attributes.url}?fm=${format}`)
+    handleChange(id, `${upload?.attributes.url}?fm=${format}&w=1000`)
     setTimeout(handleImageLoading, 200)
 
   }
 
   const handleImageLoading = () => {
     const images = ref.current?.querySelectorAll('img');
-    let loaded = Array.from(images).filter(el => el.complete).length;
-    if (loaded >= images.length) return
+    let loaded = Array.from(images ?? []).filter(el => el.complete).length;
+    if (images) {
+      if (loaded >= images.length) return
+    }
 
     setLoading(true)
-    images.forEach(el => {
-      el.addEventListener('load', () => (++loaded === images.length) && setLoading(false))
+    images?.forEach(el => {
+      el.addEventListener('load', () => (++loaded === images?.length) && setLoading(false))
     })
   }
 
   const handleDownload = async () => {
 
     setGenerating(true)
-    console.log('download', src)
     const dateStr = format(new Date(), 'yyyy-MM-dd HH_mm')
     const filename = `${parameters.buttonLabel || 'Image'} (${dateStr}).png`
     const blob = await fetch(`${src as string}&nocache=${Math.random()}`, { cache: "no-store" }).then(res => res.blob());
-    console.log(blob);
-
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
