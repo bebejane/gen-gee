@@ -11,7 +11,6 @@ const nextConfig = {
 	},
 	experimental: {
 		scrollRestoration: true,
-		appDir: true,
 	},
 	async headers() {
 		return [

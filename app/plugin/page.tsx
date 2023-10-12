@@ -2,7 +2,6 @@
 
 import s from './page.module.scss'
 import { isDev } from './utils'
-import * as allTemplates from '/templates'
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom'
 import {

@@ -1,7 +1,7 @@
 type Field = {
   label: string
   value: string
-  type: 'text' | 'image' | 'select' | 'textarea' | 'number' | 'color'
+  type: 'text' | 'image' | 'select' | 'textarea' | 'number' | 'color' | 'range'
   min?: number
   max?: number
   options?: [{
