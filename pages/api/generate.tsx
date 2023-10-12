@@ -8,8 +8,10 @@ import { Base64 } from '/lib/utils';
 
 export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
   console.log('generate api handler');
-  return new Response(
-    JSON.stringify({ ok: searchParams.get('f') }),
+  const { searchParams } = req.nextUrl
+
+  const mock = new Response(
+    JSON.stringify({ f: searchParams.get('f'), s: searchParams.get('s'), t: searchParams.get('t') }),
     {
       status: 200,
       headers: {
@@ -20,10 +22,11 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
 
   try {
 
-    const { searchParams } = req.nextUrl
+
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
     console.log('loaded fonts', fonts);
 
+    return mock
     const Component = templates[Object.keys(templates).find(k => k.toLowerCase() === searchParams.get('t'))]
     const { config } = Component
 
