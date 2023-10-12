@@ -6,9 +6,9 @@ import fontFiles from '/fonts.json'
 import { Base64 } from '/lib/utils';
 
 export default async function handler(req: NextRequest, res: NextResponse): Promise<ImageResponse> {
+  console.log('generate api handler');
 
   try {
-    console.log('generate api handler');
 
     const { searchParams } = req.nextUrl
     const fonts = await Promise.all(fontFiles.map(({ name }) => generateFont({ name, })))
@@ -76,4 +76,12 @@ const errorResponse = (err: Error) => {
   )
 }
 
-export const config = { runtime: 'experimental-edge' };
+export const config = {
+  runtime: 'edge',
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+    responseLimit: false,
+  },
+};
