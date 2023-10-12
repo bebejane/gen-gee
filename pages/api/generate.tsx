@@ -28,15 +28,12 @@ export default async function handler(req: NextRequest, res: NextResponse): Prom
     const props = { styles, values, config: Component.config }
 
     console.log(`generate image ${width}x${height}`);
-    //console.log(props)
 
-    const res = new ImageResponse(<Component {...props} />, {
+    return new ImageResponse(<Component {...props} />, {
       width,
       height,
       fonts
     })
-
-    return res;
 
   } catch (err) {
     console.log('error')
